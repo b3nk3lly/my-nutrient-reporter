@@ -76,6 +76,8 @@ function ReportGenerator({ meals, nutrients }) {
 
 				worksheet.addRow(newRow);
 			}
+
+			worksheet.addRow();
 		}
 
 		workbook.xlsx
