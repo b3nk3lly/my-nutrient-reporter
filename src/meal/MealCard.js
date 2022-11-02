@@ -5,8 +5,11 @@ import {
 	TextField,
 	Card,
 	CardContent,
-	CardHeader
+	CardHeader,
+	Collapse
 } from "@mui/material";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Grid from "@mui/material/Grid";
 import FoodList from "./FoodList";
@@ -14,6 +17,7 @@ import REDUCER_ACTIONS from "../ReducerActions";
 
 function MealCard({ meal, dispatch }) {
 	const [name, setName] = useState(meal.name);
+	const [collapsed, setCollapsed] = useState(false);
 
 	const handleNameChange = (event) => {
 		setName(event.target.value);
@@ -31,6 +35,10 @@ function MealCard({ meal, dispatch }) {
 	// Remove this meal from the list
 	const removeMeal = () => {
 		dispatch({ type: REDUCER_ACTIONS.REMOVE_MEAL, payload: meal });
+	};
+
+	const toggleCollapsed = () => {
+		setCollapsed(!collapsed);
 	};
 
 	return (
@@ -58,22 +66,34 @@ function MealCard({ meal, dispatch }) {
 					/>
 				}
 				action={
-					<IconButton onClick={removeMeal}>
-						<DeleteOutlineIcon />
-					</IconButton>
+					<div>
+						<IconButton onClick={removeMeal}>
+							<DeleteOutlineIcon />
+						</IconButton>
+						<IconButton onClick={toggleCollapsed}>
+							{/* Arrow direction depends on whether card is collapsed */}
+							{collapsed ? (
+								<KeyboardArrowDownOutlinedIcon />
+							) : (
+								<KeyboardArrowUpOutlinedIcon />
+							)}
+						</IconButton>
+					</div>
 				}
 				style={{ backgroundColor: "#e1eedd" }}
 			/>
-			<CardContent>
-				<Grid container rowSpacing={2}>
-					<Grid item xs={12}>
-						{<FoodInput meal={meal} dispatch={dispatch} />}
+			<Collapse in={!collapsed}>
+				<CardContent>
+					<Grid container rowSpacing={2}>
+						<Grid item xs={12}>
+							{<FoodInput meal={meal} dispatch={dispatch} />}
+						</Grid>
+						<Grid item xs={12}>
+							<FoodList meal={meal} dispatch={dispatch} />
+						</Grid>
 					</Grid>
-					<Grid item xs={12}>
-						<FoodList meal={meal} dispatch={dispatch} />
-					</Grid>
-				</Grid>
-			</CardContent>
+				</CardContent>
+			</Collapse>
 		</Card>
 	);
 }
