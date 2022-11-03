@@ -4,7 +4,7 @@ import "./App.css";
 import MealController from "./meal/MealController";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import NutrientSelection from "./nutrient/NutrientSelection";
+import NutrientSelect from "./nutrient/NutrientSelect";
 import REDUCER_ACTIONS from "./ReducerActions";
 import ReportGenerator from "./ReportGenerator";
 import Theme from "./Theme";
@@ -85,7 +85,7 @@ function App() {
 		{ id: 0, name: "", foods: [] }
 	]);
 
-	const [nutrients, setNutrients] = useState([]);
+	const [selectedNutrients, setSelectedNutrients] = useState([]);
 
 	return (
 		<ThemeProvider theme={Theme()}>
@@ -112,16 +112,19 @@ function App() {
 
 				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
 				<Grid item xs={10}>
-					<NutrientSelection
-						nutrients={nutrients}
-						setNutrients={setNutrients}
+					<NutrientSelect
+						selectedNutrients={selectedNutrients}
+						setSelectedNutrients={setSelectedNutrients}
 					/>
 				</Grid>
 				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
 
 				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
 				<Grid item xs={10}>
-					<ReportGenerator meals={meals} nutrients={nutrients} />
+					<ReportGenerator
+						meals={meals}
+						nutrients={selectedNutrients}
+					/>
 				</Grid>
 				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
 
