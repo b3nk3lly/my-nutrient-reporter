@@ -41,11 +41,9 @@ function ReportGenerator({ meals, nutrients }) {
 		];
 
 		nutrients.forEach((nutrient) => {
-			if (nutrient.selected) {
-				headers.push({
-					header: nutrient.name + " (" + nutrient.unit + ") "
-				});
-			}
+			headers.push({
+				header: nutrient.name + " (" + nutrient.unit + ") "
+			});
 		});
 
 		worksheet.columns = headers;
@@ -63,15 +61,13 @@ function ReportGenerator({ meals, nutrients }) {
 				let newRow = [food.description, food.foodCode, food.quantity];
 
 				for (let nutrient of nutrients) {
-					if (nutrient.selected) {
-						console.log("Nutrient " + nutrient.name);
-						let nutrientAmountPerFood =
-							await getNutrientAmountPerFood(nutrient, food);
-						newRow.push(nutrientAmountPerFood);
-						console.log(
-							"Pushed new value, " + nutrientAmountPerFood
-						);
-					}
+					console.log("Nutrient " + nutrient.name);
+					let nutrientAmountPerFood = await getNutrientAmountPerFood(
+						nutrient,
+						food
+					);
+					newRow.push(nutrientAmountPerFood);
+					console.log("Pushed new value, " + nutrientAmountPerFood);
 				}
 
 				worksheet.addRow(newRow);
