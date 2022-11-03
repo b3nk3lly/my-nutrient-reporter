@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import NutrientSelect from "./nutrient/NutrientSelect";
 import REDUCER_ACTIONS from "./ReducerActions";
-import ReportGenerator from "./ReportGenerator";
+import ReportGenerator from "./report/ReportGenerator";
 import Theme from "./Theme";
 
 const mealReducer = (meals, action) => {
