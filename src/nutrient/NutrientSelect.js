@@ -91,14 +91,15 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 				/>
 				<CardContent>
 					{/* selected options */}
-					<Grid item xs={12}>
+					<Grid container columnSpacing={1} rowSpacing={1}>
 						{selectedNutrients.map((nutrient) => {
 							return (
-								<Chip
-									key={nutrient.id}
-									label={nutrient.name}
-									onDelete={handleDelete(nutrient)}
-								/>
+								<Grid item key={nutrient.id}>
+									<Chip
+										label={nutrient.name}
+										onDelete={handleDelete(nutrient)}
+									/>
+								</Grid>
 							);
 						})}
 					</Grid>
