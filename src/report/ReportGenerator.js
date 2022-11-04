@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import Excel from "exceljs";
 import FileSaver from "file-saver";
-import "./App.css";
+import "../App.css";
 
 const nutrientAmountUri =
 	"https://food-nutrition.canada.ca/api/canadian-nutrient-file/nutrientamount/?lang=en&id=";
