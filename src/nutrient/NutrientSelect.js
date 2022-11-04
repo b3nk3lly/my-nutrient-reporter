@@ -4,6 +4,7 @@ import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	const nutrientNamesUri =
@@ -73,6 +74,8 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 								placeholder="Search"
 							/>
 						)}
+						popupIcon={null}
+						clearIcon={<DeleteOutlineIcon />}
 					/>
 				</Grid>
 				{/* selected options */}
