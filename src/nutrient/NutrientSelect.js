@@ -3,7 +3,7 @@ import { Container } from "@mui/system";
 import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { CardHeader, Grid, Card, CardContent, IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
@@ -49,47 +49,64 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 		setSelectedNutrients(newNutrients);
 	};
 
+	const clearNutrients = () => {
+		setSelectedNutrients([]);
+	};
+
 	return (
 		<Container>
+			<Grid item xs={12}>
+				Nutrients:
+			</Grid>
+			<Card variant="outlined" style={{ borderColor: "#e1eedd" }}>
+				<CardHeader
+					title={
+						<Autocomplete
+							multiple
+							fullWidth
+							onChange={handleChange}
+							value={selectedNutrients}
+							options={nutrients}
+							getOptionLabel={(option) => option.name}
+							// don't render selected options inside the search bar
+							renderTags={() => null}
+							// Options
+							renderInput={(params) => (
+								<TextField
+									{...params}
+									variant="standard"
+									placeholder="Search"
+								/>
+							)}
+							popupIcon={null}
+							clearIcon={null}
+						/>
+					}
+					action={
+						<IconButton onClick={clearNutrients}>
+							<DeleteOutlineIcon />
+						</IconButton>
+					}
+					style={{ backgroundColor: "#e1eedd" }}
+				/>
+				<CardContent>
+					{/* selected options */}
+					<Grid item xs={12}>
+						{selectedNutrients.map((nutrient) => {
+							return (
+								<Chip
+									key={nutrient.id}
+									label={nutrient.name}
+									onDelete={handleDelete(nutrient)}
+								/>
+							);
+						})}
+					</Grid>
+				</CardContent>
+			</Card>
 			<Grid container spacing={1}>
-				<Grid item xs={12}>
-					Nutrients:
-				</Grid>
 				{/* Search bar */}
-				<Grid item xs={12}>
-					<Autocomplete
-						multiple
-						fullWidth
-						onChange={handleChange}
-						value={selectedNutrients}
-						options={nutrients}
-						getOptionLabel={(option) => option.name}
-						// don't render selected options inside the search bar
-						renderTags={() => null}
-						// Options
-						renderInput={(params) => (
-							<TextField
-								{...params}
-								variant="filled"
-								placeholder="Search"
-							/>
-						)}
-						popupIcon={null}
-						clearIcon={<DeleteOutlineIcon />}
-					/>
-				</Grid>
-				{/* selected options */}
-				<Grid item xs={12}>
-					{selectedNutrients.map((nutrient) => {
-						return (
-							<Chip
-								key={nutrient.id}
-								label={nutrient.name}
-								onDelete={handleDelete(nutrient)}
-							/>
-						);
-					})}
-				</Grid>
+				<Grid item xs={12}></Grid>
 			</Grid>
 		</Container>
 	);
