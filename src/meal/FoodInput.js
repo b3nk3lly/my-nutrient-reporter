@@ -18,7 +18,7 @@ function FoodInput({ meal, dispatch }) {
 			foodCode: newFood["food_code"],
 			description: newFood["food_description"],
 			quantity: undefined,
-			conversionFactor: undefined
+			conversionFactor: 0.01 // default to gram conversion rate
 		};
 
 		if (meal.foods.some((food) => food.foodCode === newFood.foodCode)) {

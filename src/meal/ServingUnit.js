@@ -58,13 +58,9 @@ function ServingUnit({ meal, food, dispatch }) {
 						) === i
 				);
 
-			// if there is no unit for grams, add it
-			if (!units.some((unit) => unit["measure_name"] === "g")) {
-				units.push({
-					conversion_factor_value: "0.01",
-					measure_name: "g"
-				});
-			}
+			// if there is a unit for grams, remove it.
+			// we hard-code this as the default
+			units = units.filter((unit) => unit["measure_name"] !== "g");
 
 			// sort units alphabetically
 			units = units.sort((a, b) => {
@@ -81,12 +77,11 @@ function ServingUnit({ meal, food, dispatch }) {
 	}, [food.foodCode]);
 
 	return (
-		<Select defaultValue="0" size="small" onChange={handleUnitChange}>
-			{
-				// Default option shouldn't appear in the dropdown
-			}
-			<MenuItem disabled value="0" style={{ display: "none" }}>
-				Unit
+		<Select defaultValue="0.01" size="small" onChange={handleUnitChange}>
+			{/* select grams by default, since it's what CNF uses for nutrients
+				per food */}
+			<MenuItem value="0.01" selected>
+				g
 			</MenuItem>
 			{
 				// Display units fetched from CNF API
