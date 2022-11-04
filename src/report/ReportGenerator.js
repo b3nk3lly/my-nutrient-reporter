@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Excel from "exceljs";
 import FileSaver from "file-saver";
 import "../App.css";
@@ -87,9 +87,16 @@ function ReportGenerator({ meals, nutrients }) {
 	};
 
 	return (
-		<Button onClick={generateReport} className="Button">
-			Generate Report
-		</Button>
+		<Box display="flex" justifyContent="center" alignItems="center">
+			<Button
+				onClick={generateReport}
+				className="Button"
+				variant="outlined"
+				style={{ borderColor: "#183a1d" }}
+			>
+				Generate Report
+			</Button>
+		</Box>
 	);
 }
 
