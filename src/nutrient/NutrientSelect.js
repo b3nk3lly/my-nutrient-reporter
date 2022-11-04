@@ -35,20 +35,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 			);
 	}, []);
 
-	// make this update nutrients state with selected nutrients
-	// am I going to need to make a different state for selected nutrients?
-
-	// Follow along with this example: https://codesandbox.io/s/66881433-moving-the-chips-tags-out-of-the-autocomplete-box-in-material-ui-forked-4izhw?file=/demo.js
-	// Note the "value" state, passed in as the "value" prop and used for the onChange.
-	// I bet this is how the list still knows what's selected. The value prop is all
-	// selected options.
-
-	// Might be best to have a NutrientController component, responsible for grabbing all the
-	// nutrients. Pass those into this component as a constant list, no need for setting
-	// it again. Then the state of this component will keep track of what's been selected.
 	const handleChange = (event, values) => {
-		console.log("Values: " + values);
-		// values is a list of selected nutrients
 		setSelectedNutrients(values);
 	};
 
