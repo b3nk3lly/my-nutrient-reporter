@@ -79,7 +79,13 @@ function ServingUnit({ meal, food, dispatch }) {
 	}, [food.foodCode]);
 
 	return (
-		<Select defaultValue="0.01" size="small" onChange={handleUnitChange}>
+		<Select
+			defaultValue="0.01"
+			size="small"
+			onChange={handleUnitChange}
+			variant="standard"
+			disableUnderline
+		>
 			{/* select grams by default, since it's what CNF uses for nutrients
 				per food */}
 			<MenuItem value="0.01" selected>

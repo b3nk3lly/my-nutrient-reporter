@@ -1,4 +1,3 @@
-import ServingUnit from "./ServingUnit";
 import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Card, CardContent, IconButton } from "@mui/material";
@@ -35,11 +34,6 @@ function FoodCard({ meal, food, dispatch }) {
 					{/* Bottom row */}
 					<Grid item xs={12}>
 						<QuantityInput
-							meal={meal}
-							food={food}
-							dispatch={dispatch}
-						/>
-						<ServingUnit
 							meal={meal}
 							food={food}
 							dispatch={dispatch}
