@@ -2,14 +2,14 @@ import { useState } from "react";
 import MealCard from "./MealCard";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Container, Grid, IconButton } from "@mui/material";
-import REDUCER_ACTIONS from "../ReducerActions";
+import ReducerActions from "../enums/ReducerActions";
 
 function MealController({ meals, dispatch, foodOptions }) {
 	const [nextMealKey, setNextMealKey] = useState(1);
 
 	const addMeal = () => {
 		dispatch({
-			type: REDUCER_ACTIONS.ADD_MEAL,
+			type: ReducerActions.ADD_MEAL,
 			payload: { id: nextMealKey }
 		});
 		setNextMealKey(nextMealKey + 1);

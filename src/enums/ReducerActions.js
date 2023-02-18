@@ -1,4 +1,4 @@
-const REDUCER_ACTIONS = {
+const ReducerActions = {
 	ADD_MEAL: "add-meal",
 	REMOVE_MEAL: "remove-meal",
 	UPDATE_NAME: "update-name",
@@ -8,4 +8,4 @@ const REDUCER_ACTIONS = {
 	UPDATE_CONVERSION: "update-conversion"
 };
 
-export default REDUCER_ACTIONS;
+export default ReducerActions;

@@ -1,6 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { useState, Fragment, useEffect } from "react";
-import REDUCER_ACTIONS from "../ReducerActions";
+import ReducerActions from "../enums/ReducerActions";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function FoodInput({ meal, dispatch }) {
@@ -58,7 +58,7 @@ function FoodInput({ meal, dispatch }) {
 	const addFood = (newFood) => {
 		console.log("Adding food " + newFood.foodCode);
 		dispatch({
-			type: REDUCER_ACTIONS.ADD_FOOD,
+			type: ReducerActions.ADD_FOOD,
 			payload: { meal: meal, food: newFood }
 		});
 	};

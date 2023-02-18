@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Select, MenuItem } from "@mui/material";
-import REDUCER_ACTIONS from "../ReducerActions";
+import ReducerActions from "../enums/ReducerActions";
 
 function ServingUnit({ meal, food, dispatch }) {
 	const servingSizesUri =
@@ -12,7 +12,7 @@ function ServingUnit({ meal, food, dispatch }) {
 	const handleUnitChange = (event) => {
 		console.log("Setting conversion factor to " + event.target.value);
 		dispatch({
-			type: REDUCER_ACTIONS.UPDATE_CONVERSION,
+			type: ReducerActions.UPDATE_CONVERSION,
 			payload: { meal: meal, food: food, conversion: event.target.value }
 		});
 	};

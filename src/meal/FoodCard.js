@@ -2,7 +2,7 @@ import ServingUnit from "./ServingUnit";
 import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Card, CardContent, IconButton, TextField } from "@mui/material";
-import REDUCER_ACTIONS from "../ReducerActions";
+import ReducerActions from "../enums/ReducerActions";
 import { useState } from "react";
 import QuantityValidity from "../enums/QuantityValidity";
 import QuantityErrorMessage from "../error-messages/QuantityErrorMessage";
@@ -16,7 +16,7 @@ function FoodCard({ meal, food, dispatch }) {
 		console.log("Removing food code " + food.foodCode);
 
 		dispatch({
-			type: REDUCER_ACTIONS.REMOVE_FOOD,
+			type: ReducerActions.REMOVE_FOOD,
 			payload: { meal: meal, foodCode: food.foodCode }
 		});
 	};
@@ -43,7 +43,7 @@ function FoodCard({ meal, food, dispatch }) {
 		console.log("Dispatching quantity " + quantity);
 
 		dispatch({
-			type: REDUCER_ACTIONS.UPDATE_QUANTITY,
+			type: ReducerActions.UPDATE_QUANTITY,
 			payload: { meal: meal, food: food, quantity: quantity }
 		});
 	};

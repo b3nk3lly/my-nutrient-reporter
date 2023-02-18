@@ -13,7 +13,7 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Grid from "@mui/material/Grid";
 import FoodList from "./FoodList";
-import REDUCER_ACTIONS from "../ReducerActions";
+import ReducerActions from "../enums/ReducerActions";
 
 function MealCard({ meal, dispatch, foodOptions }) {
 	const [name, setName] = useState(meal.name);
@@ -27,14 +27,14 @@ function MealCard({ meal, dispatch, foodOptions }) {
 	const updateName = (event) => {
 		console.log("Setting meal name to " + event.target.value);
 		dispatch({
-			type: REDUCER_ACTIONS.UPDATE_NAME,
+			type: ReducerActions.UPDATE_NAME,
 			payload: { meal: meal, name: event.target.value }
 		});
 	};
 
 	// Remove this meal from the list
 	const removeMeal = () => {
-		dispatch({ type: REDUCER_ACTIONS.REMOVE_MEAL, payload: meal });
+		dispatch({ type: ReducerActions.REMOVE_MEAL, payload: meal });
 	};
 
 	const toggleCollapsed = () => {

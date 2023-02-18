@@ -5,19 +5,19 @@ import MealController from "./meal/MealController";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import NutrientSelect from "./nutrient/NutrientSelect";
-import REDUCER_ACTIONS from "./ReducerActions";
+import ReducerActions from "./enums/ReducerActions";
 import ReportGenerator from "./report/ReportGenerator";
 import Theme from "./Theme";
 
 const mealReducer = (meals, action) => {
 	switch (action.type) {
-		case REDUCER_ACTIONS.ADD_MEAL:
+		case ReducerActions.ADD_MEAL:
 			return [...meals, { id: action.payload.id, name: "", foods: [] }];
 
-		case REDUCER_ACTIONS.REMOVE_MEAL:
+		case ReducerActions.REMOVE_MEAL:
 			return meals.filter((meal) => meal.id !== action.payload.id);
 
-		case REDUCER_ACTIONS.UPDATE_NAME:
+		case ReducerActions.UPDATE_NAME:
 			return meals.map((meal) => {
 				if (meal.id === action.payload.meal.id) {
 					let newMeal = { ...meal };
@@ -27,7 +27,7 @@ const mealReducer = (meals, action) => {
 				return meal;
 			});
 
-		case REDUCER_ACTIONS.ADD_FOOD:
+		case ReducerActions.ADD_FOOD:
 			return meals.map((meal) => {
 				if (meal.id === action.payload.meal.id) {
 					let newMeal = { ...meal };
@@ -37,7 +37,7 @@ const mealReducer = (meals, action) => {
 				return meal;
 			});
 
-		case REDUCER_ACTIONS.REMOVE_FOOD:
+		case ReducerActions.REMOVE_FOOD:
 			return meals.map((meal) => {
 				if (meal.id === action.payload.meal.id) {
 					let newMeal = { ...meal };
@@ -49,7 +49,7 @@ const mealReducer = (meals, action) => {
 				return meal;
 			});
 
-		case REDUCER_ACTIONS.UPDATE_QUANTITY: {
+		case ReducerActions.UPDATE_QUANTITY: {
 			let mealIndex = meals.findIndex(
 				(meal) => meal.id === action.payload.meal.id
 			);
@@ -62,7 +62,7 @@ const mealReducer = (meals, action) => {
 			return meals;
 		}
 
-		case REDUCER_ACTIONS.UPDATE_CONVERSION: {
+		case ReducerActions.UPDATE_CONVERSION: {
 			let mealIndex = meals.findIndex(
 				(meal) => meal.id === action.payload.meal.id
 			);
