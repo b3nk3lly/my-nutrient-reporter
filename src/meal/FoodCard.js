@@ -3,8 +3,14 @@ import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Card, CardContent, IconButton, TextField } from "@mui/material";
 import REDUCER_ACTIONS from "../ReducerActions";
+import { useState } from "react";
+import QuantityValidity from "../enums/QuantityValidity";
+import QuantityErrorMessage from "../error-messages/QuantityErrorMessage";
 
 function FoodCard({ meal, food, dispatch }) {
+	const [quantity, setQuantity] = useState();
+	const [validity, setValidity] = useState(QuantityValidity.VALID);
+
 	// Remove the food item when the Remove button is clicked
 	const removeFood = () => {
 		console.log("Removing food code " + food.foodCode);
@@ -15,12 +21,30 @@ function FoodCard({ meal, food, dispatch }) {
 		});
 	};
 
-	// Set quantity based on the textbox
 	const handleQuantityChange = (event) => {
-		console.log("Setting quantity to " + event.target.value);
+		let _quantity = event.target.value;
+		console.log("Setting quantity to " + _quantity);
+
+		if (!_quantity) {
+			setValidity(QuantityValidity.EMPTY);
+		} else if (isNaN(_quantity)) {
+			setValidity(QuantityValidity.NAN);
+		} else if (_quantity <= 0) {
+			setValidity(QuantityValidity.NON_POSITIVE);
+		} else {
+			setValidity(QuantityValidity.VALID);
+		}
+
+		setQuantity(_quantity);
+	};
+
+	// Set quantity based on the textbox
+	const dispatchQuantity = () => {
+		console.log("Dispatching quantity " + quantity);
+
 		dispatch({
 			type: REDUCER_ACTIONS.UPDATE_QUANTITY,
-			payload: { meal: meal, food: food, quantity: event.target.value }
+			payload: { meal: meal, food: food, quantity: quantity }
 		});
 	};
 
@@ -41,11 +65,13 @@ function FoodCard({ meal, food, dispatch }) {
 					</Grid>
 
 					{/* Bottom row */}
+					<QuantityErrorMessage validity={validity} />
 					<Grid item xs={12}>
 						<TextField
 							placeholder="Enter quantity"
 							size="small"
-							onBlur={handleQuantityChange}
+							onChange={handleQuantityChange}
+							onBlur={dispatchQuantity}
 						/>
 						<ServingUnit
 							meal={meal}
