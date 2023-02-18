@@ -1,5 +1,4 @@
 import QuantityValidity from "../enums/QuantityValidity";
-import GenericErrorMessage from "./GenericErrorMessage";
 
 const getMessage = (validity) => {
 	switch (validity) {
@@ -15,9 +14,7 @@ const getMessage = (validity) => {
 };
 
 function QuantityErrorMessage({ validity }) {
-	return validity === QuantityValidity.VALID ? null : (
-		<GenericErrorMessage message={getMessage(validity)} />
-	);
+	return validity === QuantityValidity.VALID ? null : getMessage(validity);
 }
 
 export default QuantityErrorMessage;
