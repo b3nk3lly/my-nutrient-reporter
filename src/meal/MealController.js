@@ -4,7 +4,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Container, Grid, IconButton } from "@mui/material";
 import REDUCER_ACTIONS from "../ReducerActions";
 
-function MealController({ meals, dispatch }) {
+function MealController({ meals, dispatch, foodOptions }) {
 	const [nextMealKey, setNextMealKey] = useState(1);
 
 	const addMeal = () => {

@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import FoodList from "./FoodList";
 import REDUCER_ACTIONS from "../ReducerActions";
 
-function MealCard({ meal, dispatch }) {
+function MealCard({ meal, dispatch, foodOptions }) {
 	const [name, setName] = useState(meal.name);
 	const [collapsed, setCollapsed] = useState(false);
 
