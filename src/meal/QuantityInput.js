@@ -41,6 +41,7 @@ function QuantityInput({ meal, food, dispatch }) {
 			error={validity !== QuantityValidity.VALID}
 			placeholder="Enter quantity"
 			size="small"
+			autoComplete="off"
 			InputProps={{
 				endAdornment: (
 					<ServingUnit meal={meal} food={food} dispatch={dispatch} />
