@@ -1,92 +1,116 @@
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
-import { useState } from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import { useState, Fragment, useEffect } from "react";
 import REDUCER_ACTIONS from "../ReducerActions";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function FoodInput({ meal, dispatch }) {
 	const foodUri =
-		"https://food-nutrition.canada.ca/api/canadian-nutrient-file/food/?lang=en&id=";
+		"https://food-nutrition.canada.ca/api/canadian-nutrient-file/food/?lang=en&type=json";
 
-	const [foodId, setFoodId] = useState("");
+	const [food, setFood] = useState({ description: "" });
+	const [open, setOpen] = useState(false);
+	const [options, setOptions] = useState([]);
+	const loading = open && options.length === 0;
 
-	/**
-	 * Adds a food to the food list if it is not already in the list.
-	 * @return true if the food is added to the list and false otherwise
-	 */
-	const addFood = (newFood) => {
-		newFood = {
-			foodCode: newFood["food_code"],
-			description: newFood["food_description"],
-			quantity: undefined,
-			conversionFactor: 0.01 // default to gram conversion rate
-		};
+	useEffect(() => {
+		let active = true;
 
-		if (meal.foods.some((food) => food.foodCode === newFood.foodCode)) {
-			return false;
+		if (!loading) {
+			return undefined;
 		}
 
+		(async () => {
+			if (active) {
+				fetch(foodUri) // fetch foods
+					.then((result) => result.json()) // convert to JSON
+					.then((json) =>
+						setOptions(
+							json.map((food) => {
+								return {
+									foodCode: food["food_code"],
+									description: food["food_description"],
+									quantity: undefined,
+									conversionFactor: 0.01 // default to gram conversion rate
+								};
+							})
+						)
+					);
+			}
+		})();
+
+		return () => {
+			active = false;
+		};
+	}, [loading]);
+
+	useEffect(() => {
+		if (!open) {
+			setOptions([]);
+		}
+	}, [open]);
+
+	// returns true if and only if the meal already contains a given food
+	const isOptionSelected = (option) => {
+		return meal.foods.some((food) => food.foodCode === option.foodCode);
+	};
+
+	// Adds a food to the meal
+	const addFood = (newFood) => {
 		console.log("Adding food " + newFood.foodCode);
 		dispatch({
 			type: REDUCER_ACTIONS.ADD_FOOD,
 			payload: { meal: meal, food: newFood }
 		});
-
-		return true;
 	};
 
 	// Update food ID based on user input
-	const handleChange = (event) => {
-		setFoodId(event.target.value);
-	};
-
-	// Try to fetch food from Nutrient File based on food ID
-	const handleClick = async () => {
-		if (foodId) {
-			await fetch(foodUri + foodId)
-				.then((result) => result.json())
-				.then((json) => {
-					if (json.length === 0) {
-						console.log("Couldn't find food with that ID :(");
-					} else {
-						// Try to add first (and only) object in result
-						if (addFood(json[0])) {
-							setFoodId("");
-						} else {
-							console.log("That food is already in the list.");
-						}
-					}
-				});
-		}
-	};
-
-	// Call handleClick if user hits Enter
-	const handleKeyDown = (event) => {
-		if (event.key === "Enter") {
-			handleClick();
+	const handleChange = (event, value) => {
+		if (value !== null) {
+			addFood(value);
+			setFood({ description: "" });
 		}
 	};
 
 	return (
-		<TextField
-			placeholder="Enter food code"
-			maxLength="5"
-			size="small"
-			value={foodId}
+		<Autocomplete
+			// don't include foods we already selected
+			options={options.filter((option) => !isOptionSelected(option))}
+			getOptionLabel={(food) => food.description}
 			onChange={handleChange}
-			onKeyDown={handleKeyDown}
-			InputProps={{
-				endAdornment: (
-					<InputAdornment position="end">
-						<IconButton
-							variant="outlined"
-							edge="end"
-							onClick={handleClick}
-						>
-							<AddCircleOutlineIcon />
-						</IconButton>
-					</InputAdornment>
-				)
+			value={food}
+			open={open}
+			onOpen={() => {
+				setOpen(true);
 			}}
+			onClose={() => {
+				setOpen(false);
+			}}
+			loading={loading}
+			// don't render selected options inside the search bar
+			renderTags={() => null}
+			renderInput={(params) => (
+				<TextField
+					{...params}
+					variant="standard"
+					placeholder="Search"
+					InputProps={{
+						...params.InputProps,
+						endAdornment: (
+							<Fragment>
+								{loading ? (
+									<CircularProgress
+										color="inherit"
+										size={20}
+									/>
+								) : null}
+								{params.InputProps.endAdornment}
+							</Fragment>
+						)
+					}}
+				/>
+			)}
+			popupIcon={null}
+			clearIcon={null}
 		/>
 	);
 }
