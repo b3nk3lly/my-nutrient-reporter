@@ -1,16 +1,11 @@
 import ServingUnit from "./ServingUnit";
 import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Card, CardContent, IconButton, TextField } from "@mui/material";
+import { Card, CardContent, IconButton } from "@mui/material";
 import ReducerActions from "../enums/ReducerActions";
-import { useState } from "react";
-import QuantityValidity from "../enums/QuantityValidity";
-import QuantityErrorMessage from "../error-messages/QuantityErrorMessage";
+import QuantityInput from "./QuantityInput";
 
 function FoodCard({ meal, food, dispatch }) {
-	const [quantity, setQuantity] = useState();
-	const [validity, setValidity] = useState(QuantityValidity.VALID);
-
 	// Remove the food item when the Remove button is clicked
 	const removeFood = () => {
 		console.log("Removing food code " + food.foodCode);
@@ -18,33 +13,6 @@ function FoodCard({ meal, food, dispatch }) {
 		dispatch({
 			type: ReducerActions.REMOVE_FOOD,
 			payload: { meal: meal, foodCode: food.foodCode }
-		});
-	};
-
-	const handleQuantityChange = (event) => {
-		let _quantity = event.target.value;
-		console.log("Setting quantity to " + _quantity);
-
-		if (!_quantity) {
-			setValidity(QuantityValidity.EMPTY);
-		} else if (isNaN(_quantity)) {
-			setValidity(QuantityValidity.NAN);
-		} else if (_quantity <= 0) {
-			setValidity(QuantityValidity.NON_POSITIVE);
-		} else {
-			setValidity(QuantityValidity.VALID);
-		}
-
-		setQuantity(_quantity);
-	};
-
-	// Set quantity based on the textbox
-	const dispatchQuantity = () => {
-		console.log("Dispatching quantity " + quantity);
-
-		dispatch({
-			type: ReducerActions.UPDATE_QUANTITY,
-			payload: { meal: meal, food: food, quantity: quantity }
 		});
 	};
 
@@ -65,13 +33,11 @@ function FoodCard({ meal, food, dispatch }) {
 					</Grid>
 
 					{/* Bottom row */}
-					<QuantityErrorMessage validity={validity} />
 					<Grid item xs={12}>
-						<TextField
-							placeholder="Enter quantity"
-							size="small"
-							onChange={handleQuantityChange}
-							onBlur={dispatchQuantity}
+						<QuantityInput
+							meal={meal}
+							food={food}
+							dispatch={dispatch}
 						/>
 						<ServingUnit
 							meal={meal}
