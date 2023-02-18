@@ -26,6 +26,8 @@ function ServingUnit({ meal, food, dispatch }) {
 				.filter(
 					(unit) => unit["measure_name"] !== "no serving specified"
 				)
+				// filter options that include a number of grams measurement
+				.filter((unit) => !/[0-9]+g/.test(unit["measure_name"]))
 				// simplify unit options
 				.map((unit) => {
 					// get the quantity of the serving size
