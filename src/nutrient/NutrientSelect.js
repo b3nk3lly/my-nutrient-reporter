@@ -14,8 +14,6 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 
 	// Fetch nutrient list when page loads
 	useEffect(() => {
-		console.log("Fetching nutrient list");
-		console.log(selectedNutrients);
 		fetch(nutrientNamesUri) // fetch nutrients
 			.then((result) => result.json()) // convert to JSON
 			.then((json) =>
@@ -34,7 +32,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 						})
 				)
 			);
-	}, [selectedNutrients]);
+	}, []);
 
 	const handleChange = (event, values) => {
 		setSelectedNutrients(values);
