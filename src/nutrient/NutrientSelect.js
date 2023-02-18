@@ -34,7 +34,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 						})
 				)
 			);
-	}, []);
+	}, [selectedNutrients]);
 
 	const handleChange = (event, values) => {
 		setSelectedNutrients(values);
