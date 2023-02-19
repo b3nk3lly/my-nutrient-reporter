@@ -25,14 +25,20 @@ function FoodInput({ meal, dispatch }) {
 					.then((result) => result.json()) // convert to JSON
 					.then((json) =>
 						setOptions(
-							json.map((food) => {
-								return {
-									foodCode: food["food_code"],
-									description: food["food_description"],
-									quantity: undefined,
-									conversionFactor: 0.01 // default to gram conversion rate
-								};
-							})
+							json
+								.map((food) => {
+									return {
+										foodCode: food["food_code"],
+										description: food["food_description"],
+										quantity: undefined,
+										conversionFactor: 0.01 // default to gram conversion rate
+									};
+								})
+								.sort((a, b) => {
+									return a.description > b.description
+										? 1
+										: -1; // sort alphabetically
+								})
 						)
 					);
 			}
