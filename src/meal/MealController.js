@@ -19,11 +19,13 @@ function MealController({ meals, dispatch, foodOptions }) {
 		<Container>
 			<Grid container rowSpacing={1}>
 				<h2>Meals</h2>
-				<IconButton onClick={addMeal}>
-					<AddCircleOutlineIcon />
-				</IconButton>
 			</Grid>
-			<Grid container rowSpacing={2}>
+			<Grid
+				container
+				rowSpacing={2}
+				alignItems="center"
+				justifyContent="center"
+			>
 				{meals.map((meal) => {
 					return (
 						<Grid item xs={12} key={meal.id}>
@@ -31,6 +33,14 @@ function MealController({ meals, dispatch, foodOptions }) {
 						</Grid>
 					);
 				})}
+				<Grid item>
+					<IconButton
+						onClick={addMeal}
+						sx={{ transform: "scale(1.2)" }}
+					>
+						<AddCircleOutlineIcon />
+					</IconButton>
+				</Grid>
 			</Grid>
 		</Container>
 	);
