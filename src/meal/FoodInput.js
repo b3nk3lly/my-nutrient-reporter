@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, createFilterOptions } from "@mui/material";
 import { useState, Fragment, useEffect } from "react";
 import ReducerActions from "../enums/ReducerActions";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -60,6 +60,12 @@ function FoodInput({ meal, dispatch }) {
 		return meal.foods.some((food) => food.foodCode === option.foodCode);
 	};
 
+	// match options by name or food code
+	const filterOptions = createFilterOptions({
+		matchFrom: "any",
+		stringify: (option) => option.description + option.foodCode
+	});
+
 	// Adds a food to the meal
 	const addFood = (newFood) => {
 		console.log("Adding food " + newFood.foodCode);
@@ -82,6 +88,7 @@ function FoodInput({ meal, dispatch }) {
 			// don't include foods we already selected
 			options={options.filter((option) => !isOptionSelected(option))}
 			getOptionLabel={(food) => food.description}
+			filterOptions={filterOptions}
 			onChange={handleChange}
 			value={food}
 			open={open}
@@ -98,7 +105,7 @@ function FoodInput({ meal, dispatch }) {
 				<TextField
 					{...params}
 					variant="standard"
-					placeholder="Search"
+					placeholder="Search by name or food code"
 					InputProps={{
 						...params.InputProps,
 						endAdornment: (
