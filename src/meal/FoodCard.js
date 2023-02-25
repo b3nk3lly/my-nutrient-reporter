@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Card, CardContent, IconButton } from "@mui/material";
+import { Card, CardContent, IconButton, Typography } from "@mui/material";
 import ReducerActions from "../enums/ReducerActions";
 import QuantityInput from "./QuantityInput";
 
@@ -16,14 +16,15 @@ function FoodCard({ meal, food, dispatch }) {
 	};
 
 	return (
-		<Card variant="outlined">
+		<Card variant="outlined" sx={{ borderRadius: 5 }}>
 			<CardContent>
 				<Grid container rowSpacing={1}>
 					{/* Top row */}
 					<Grid item xs={11}>
-						{food.description}
-						<br />
-						{"Food code: " + food.foodCode}
+						<Typography>{food.description}</Typography>
+						<Typography variant="caption">
+							{"Food code: " + food.foodCode}
+						</Typography>
 					</Grid>
 					<Grid item xs={1}>
 						<IconButton onClick={removeFood}>

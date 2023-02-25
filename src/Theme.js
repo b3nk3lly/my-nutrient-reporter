@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { alpha, createTheme } from "@mui/material/styles";
 
 function Theme() {
 	const lightGreen = "#e1eedd";
@@ -12,7 +12,9 @@ function Theme() {
 			MuiButton: {
 				styleOverrides: {
 					root: {
-						color: darkGreen
+						color: darkGreen,
+						borderColor: "black",
+						borderRadius: 5
 					}
 				}
 			},
@@ -23,17 +25,29 @@ function Theme() {
 						border: darkGreen
 					}
 				}
+			},
+			MuiCardHeader: {
+				styleOverrides: {
+					root: {
+						background: alpha(darkGreen, 0.08)
+					}
+				}
 			}
 		},
 		palette: {
 			background: {
-				default: beige,
-				paper: beige
+				paper: "#eef7d4"
 			}
 		},
 		typography: {
+			h1: {
+				fontFamily: "sans-serif",
+				textAlign: "center",
+				color: "#fb6f92",
+				fontSize: "5rem"
+			},
 			body1: {
-				color: darkGreen
+				color: "black"
 			}
 		}
 	});

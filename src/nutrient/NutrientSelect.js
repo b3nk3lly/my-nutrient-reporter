@@ -54,9 +54,13 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	return (
 		<Container>
 			<Grid item xs={12}>
-				Nutrients:
+				<h2>Nutrients</h2>
 			</Grid>
-			<Card variant="outlined" style={{ borderColor: "#e1eedd" }}>
+			<Card
+				variant="outlined"
+				//style={{ borderColor: "#e1eedd" }}
+				sx={{ border: 2, borderRadius: 5 }}
+			>
 				<CardHeader
 					title={
 						<Autocomplete
@@ -85,28 +89,25 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 							<DeleteOutlineIcon />
 						</IconButton>
 					}
-					style={{ backgroundColor: "#e1eedd" }}
 				/>
-				<CardContent>
-					{/* selected options */}
-					<Grid container columnSpacing={1} rowSpacing={1}>
-						{selectedNutrients.map((nutrient) => {
-							return (
-								<Grid item key={nutrient.id}>
-									<Chip
-										label={nutrient.name}
-										onDelete={handleDelete(nutrient)}
-									/>
-								</Grid>
-							);
-						})}
-					</Grid>
-				</CardContent>
+				{selectedNutrients.length > 0 ? (
+					<CardContent>
+						{/* selected options */}
+						<Grid container columnSpacing={1} rowSpacing={1}>
+							{selectedNutrients.map((nutrient) => {
+								return (
+									<Grid item key={nutrient.id}>
+										<Chip
+											label={nutrient.name}
+											onDelete={handleDelete(nutrient)}
+										/>
+									</Grid>
+								);
+							})}
+						</Grid>
+					</CardContent>
+				) : null}
 			</Card>
-			<Grid container spacing={1}>
-				{/* Search bar */}
-				<Grid item xs={12}></Grid>
-			</Grid>
 		</Container>
 	);
 }

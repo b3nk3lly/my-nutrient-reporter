@@ -1,5 +1,5 @@
 import { useState, useReducer } from "react";
-import { Grid } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import "./App.css";
 import MealController from "./meal/MealController";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,6 +8,8 @@ import NutrientSelect from "./nutrient/NutrientSelect";
 import ReducerActions from "./enums/ReducerActions";
 import ReportGenerator from "./report/ReportGenerator";
 import Theme from "./Theme";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const mealReducer = (meals, action) => {
 	switch (action.type) {
@@ -90,47 +92,32 @@ function App() {
 	return (
 		<ThemeProvider theme={Theme()}>
 			<CssBaseline />
-			<Grid container>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-				<Grid item xs={10}>
-					<Grid
-						item
-						xs={12}
-						style={{ textAlign: "center", color: "#f6c453" }}
-					>
-						<h1>Nutrition Reporter</h1>
-					</Grid>
+
+			<Grid container rowSpacing={1}>
+				<Grid item xs={12}>
+					<Header />
 				</Grid>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-			</Grid>
-			<Grid container rowSpacing={5}>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-				<Grid item xs={10}>
+				<Grid item xs={12}>
+					<Divider />
+				</Grid>
+				<Grid item xs={12}>
 					<MealController meals={meals} dispatch={mealDispatch} />
 				</Grid>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-				<Grid item xs={10}>
+				<Grid item xs={12}>
 					<NutrientSelect
 						selectedNutrients={selectedNutrients}
 						setSelectedNutrients={setSelectedNutrients}
 					/>
 				</Grid>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-				<Grid item xs={10}>
+				<Grid item xs={12}>
 					<ReportGenerator
 						meals={meals}
 						nutrients={selectedNutrients}
 					/>
 				</Grid>
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
-				<Grid item xs={10} />
-				<Grid item xs={1} style={{ backgroundColor: "#e1eedd" }}></Grid>
+				<Grid item xs={12}>
+					<Footer />
+				</Grid>
 			</Grid>
 		</ThemeProvider>
 	);

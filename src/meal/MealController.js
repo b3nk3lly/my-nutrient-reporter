@@ -17,18 +17,17 @@ function MealController({ meals, dispatch, foodOptions }) {
 
 	return (
 		<Container>
-			Meals
-			<IconButton onClick={addMeal}>
-				<AddCircleOutlineIcon />
-			</IconButton>
+			<Grid container rowSpacing={1}>
+				<h2>Meals</h2>
+				<IconButton onClick={addMeal}>
+					<AddCircleOutlineIcon />
+				</IconButton>
+			</Grid>
 			<Grid container rowSpacing={2}>
 				{meals.map((meal) => {
 					return (
-						/* One row per Meal, with each Meal taking up half the space */
 						<Grid item xs={12} key={meal.id}>
-							<Grid item xs={12}>
-								<MealCard meal={meal} dispatch={dispatch} />
-							</Grid>
+							<MealCard meal={meal} dispatch={dispatch} />
 						</Grid>
 					);
 				})}

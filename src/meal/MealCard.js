@@ -42,7 +42,7 @@ function MealCard({ meal, dispatch, foodOptions }) {
 	};
 
 	return (
-		<Card variant="outlined" style={{ borderColor: "#e1eedd" }}>
+		<Card variant="outlined" sx={{ border: 2, borderRadius: 5 }}>
 			<CardHeader
 				title={
 					<TextField
@@ -80,7 +80,6 @@ function MealCard({ meal, dispatch, foodOptions }) {
 						</IconButton>
 					</div>
 				}
-				style={{ backgroundColor: "#e1eedd" }}
 			/>
 			<Collapse in={!collapsed}>
 				<CardContent>

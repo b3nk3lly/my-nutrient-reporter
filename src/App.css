@@ -40,3 +40,7 @@
 .MuiTextField-root {
 	color: purple;
 }
+
+body {
+	background-image: url("../public/background.jpg");
+}
