@@ -16,7 +16,7 @@ function FoodCard({ meal, food, dispatch }) {
 	};
 
 	return (
-		<Card variant="outlined" sx={{ borderRadius: 5 }}>
+		<Card variant="outlined" sx={{ borderRadius: 5, borderColor: "gray" }}>
 			<CardContent>
 				<Grid container rowSpacing={1}>
 					{/* Top row */}
