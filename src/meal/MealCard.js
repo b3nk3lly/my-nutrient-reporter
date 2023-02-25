@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import FoodList from "./FoodList";
 import ReducerActions from "../enums/ReducerActions";
 
-function MealCard({ meal, dispatch, foodOptions }) {
+function MealCard({ meal, dispatch, isOnlyMeal }) {
 	const [name, setName] = useState(meal.name);
 	const [collapsed, setCollapsed] = useState(false);
 
@@ -32,9 +32,23 @@ function MealCard({ meal, dispatch, foodOptions }) {
 		});
 	};
 
-	// Remove this meal from the list
+	/**
+	 * Removes a meal. Prompts the user with a confirmation dialog if the meal contains any food.
+	 * Does nothing if this is the only meal.
+	 */
 	const removeMeal = () => {
-		dispatch({ type: ReducerActions.REMOVE_MEAL, payload: meal });
+		console.log(isOnlyMeal);
+		if (
+			!isOnlyMeal &&
+			(meal.foods.length === 0 ||
+				window.confirm(
+					`Are you sure you want to delete ${
+						name === "" ? "Untitled Meal" : name
+					}?`
+				))
+		) {
+			dispatch({ type: ReducerActions.REMOVE_MEAL, payload: meal });
+		}
 	};
 
 	const toggleCollapsed = () => {

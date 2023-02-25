@@ -10,7 +10,7 @@ function MealController({ meals, dispatch, foodOptions }) {
 	const addMeal = () => {
 		dispatch({
 			type: ReducerActions.ADD_MEAL,
-			payload: { id: nextMealKey }
+			payload: { id: nextMealKey, name: "Untitled Meal" }
 		});
 		setNextMealKey(nextMealKey + 1);
 	};
@@ -29,7 +29,11 @@ function MealController({ meals, dispatch, foodOptions }) {
 				{meals.map((meal) => {
 					return (
 						<Grid item xs={12} key={meal.id}>
-							<MealCard meal={meal} dispatch={dispatch} />
+							<MealCard
+								meal={meal}
+								dispatch={dispatch}
+								isOnlyMeal={meals.length === 1}
+							/>
 						</Grid>
 					);
 				})}
