@@ -44,7 +44,7 @@ function Theme() {
 				fontFamily: "sans-serif",
 				textAlign: "center",
 				color: "#fb6f92",
-				fontSize: "5rem"
+				fontSize: "4rem"
 			},
 			body1: {
 				color: "black"
