@@ -22,7 +22,7 @@ function MealController({ meals, dispatch, foodOptions }) {
 			</Grid>
 			<Grid
 				container
-				rowSpacing={2}
+				rowSpacing={3}
 				alignItems="center"
 				justifyContent="center"
 			>

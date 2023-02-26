@@ -3,7 +3,7 @@ import FoodCard from "./FoodCard";
 
 function FoodList({ meal, dispatch }) {
 	return (
-		<Grid container rowSpacing={1}>
+		<Grid container rowSpacing={3}>
 			{meal.foods.map((food) => {
 				return (
 					<Grid item xs={12} key={food.foodCode}>

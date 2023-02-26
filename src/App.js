@@ -22,29 +22,34 @@ function App() {
 		<ThemeProvider theme={Theme()}>
 			<CssBaseline />
 
-			<Grid container rowSpacing={1}>
-				<Grid item xs={12}>
+			<Grid
+				container
+				rowSpacing={1}
+				alignItems="center"
+				justifyContent="center"
+			>
+				<Grid item xs={12} sm={10}>
 					<Header />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={10}>
 					<Divider />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} sm={10}>
 					<MealController meals={meals} dispatch={mealDispatch} />
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} sm={10}>
 					<NutrientSelect
 						selectedNutrients={selectedNutrients}
 						setSelectedNutrients={setSelectedNutrients}
 					/>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} sm={10}>
 					<GenerateReportButton
 						meals={meals}
 						nutrients={selectedNutrients}
 					/>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} sm={10}>
 					<Footer />
 				</Grid>
 			</Grid>
