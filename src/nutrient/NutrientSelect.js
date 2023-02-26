@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import { CardHeader, Grid, Card, CardContent, IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Macronutrients from "../enums/Macronutrients";
 
 function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	const nutrientNamesUri =
@@ -12,27 +13,54 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 
 	const [nutrients, setNutrients] = useState([]);
 
+	/**
+	 * Maps JSON to a nutrient.
+	 */
+	const newNutrient = (nutrient) => {
+		return {
+			key: nutrient["nutrient_name_id"],
+			id: nutrient["nutrient_name_id"],
+			name: nutrient["nutrient_web_name"],
+			unit: nutrient["unit"]
+		};
+	};
+
 	// Fetch nutrient list when page loads
 	useEffect(() => {
-		fetch(nutrientNamesUri) // fetch nutrients
-			.then((result) => result.json()) // convert to JSON
-			.then((json) =>
-				setNutrients(
-					json
-						.map((nutrient) => {
-							return {
-								key: nutrient["nutrient_name_id"],
-								id: nutrient["nutrient_name_id"],
-								name: nutrient["nutrient_web_name"],
-								unit: nutrient["unit"]
-							};
-						})
-						.sort((a, b) => {
-							return a.name > b.name ? 1 : -1; // sort alphabetically
-						})
+		async function fetchNutrients() {
+			let result = await fetch(nutrientNamesUri); // fetch nutrients
+			let json = await result.json(); // convert to JSON
+
+			// find the macronutrients Protein, Total Fat, and Carbohydrates
+			// and have them selected by default
+			let macronutrients = json
+				.filter((nutrient) =>
+					[
+						Macronutrients.PROTEIN,
+						Macronutrients.FAT,
+						Macronutrients.CARBS
+					].includes(nutrient["nutrient_name_id"])
 				)
+				.map(newNutrient);
+
+			setSelectedNutrients(macronutrients);
+
+			setNutrients(
+				json.map(newNutrient).sort((a, b) => {
+					return a.name > b.name ? 1 : -1; // sort alphabetically
+				})
 			);
+		}
+
+		fetchNutrients();
 	}, []);
+
+	/**
+	 * 	Returns true if and only if the nutrient is already selected
+	 */
+	const isOptionSelected = (option) => {
+		return selectedNutrients.some((nutrient) => nutrient.id === option.id);
+	};
 
 	const handleChange = (event, values) => {
 		setSelectedNutrients(values);
@@ -68,7 +96,9 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 							fullWidth
 							onChange={handleChange}
 							value={selectedNutrients}
-							options={nutrients}
+							options={nutrients.filter(
+								(nutrient) => !isOptionSelected(nutrient)
+							)}
 							getOptionLabel={(option) => option.name}
 							// don't render selected options inside the search bar
 							renderTags={() => null}
