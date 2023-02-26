@@ -2,6 +2,7 @@ import { Button, Box, Typography } from "@mui/material";
 import Excel from "exceljs";
 import FileSaver from "file-saver";
 import "../App.css";
+import Macronutrients from "../enums/Macronutrients";
 
 const nutrientAmountUri =
 	"https://food-nutrition.canada.ca/api/canadian-nutrient-file/nutrientamount/?lang=en&id=";
@@ -24,9 +25,61 @@ const getNutrientAmountPerFood = async (nutrient, food) => {
 	console.log("quantity: " + food.quantity);
 
 	// calculate amount of the nutrient per food
-	let nutrientResult = nutrientAmount * food.conversion * food.quantity;
-	// Round result to 2 decimal points
-	return Math.round((nutrientResult + Number.EPSILON) * 100) / 100;
+	return nutrientAmount * food.conversion * food.quantity;
+};
+
+/**
+ * Returns true if and only if the list of nutrients contains Protein,
+ * Total Fat, and Carbohydrates.
+ */
+const containsAllMacronutrients = (nutrients) => {
+	return (
+		nutrients.some((nutrient) => nutrient.id === Macronutrients.PROTEIN) &&
+		nutrients.some((nutrient) => nutrient.id === Macronutrients.FAT) &&
+		nutrients.some((nutrient) => nutrient.id === Macronutrients.CARBS)
+	);
+};
+
+const writeMacronutrientReport = (
+	workbook,
+	totalProtein,
+	totalFat,
+	totalCarbs
+) => {
+	let worksheet = workbook.addWorksheet("Macronutrient Report");
+
+	worksheet.columns = [
+		{ header: "Macronutrient Distribution" },
+		{ header: "Protein" },
+		{ header: "Fat" },
+		{ header: "Carbohydrates" },
+		{ header: "Total" }
+	];
+
+	let KCALS_PER_GRAM_PROTEIN = 4;
+	let KCALS_PER_GRAM_FAT = 9;
+	let KCALS_PER_GRAM_CARBS = 4;
+
+	let kcalProtein = totalProtein * KCALS_PER_GRAM_PROTEIN;
+	let kcalFat = totalFat * KCALS_PER_GRAM_FAT;
+	let kcalCarbs = totalCarbs * KCALS_PER_GRAM_CARBS;
+	let kcalTotal = kcalProtein + kcalFat + kcalCarbs;
+
+	worksheet.addRow([
+		"Calculated Energy for Macronutrient Distribution (kCal)",
+		parseFloat(kcalProtein.toFixed(2)),
+		parseFloat(kcalFat.toFixed(2)),
+		parseFloat(kcalCarbs.toFixed(2)),
+		parseFloat(kcalTotal.toFixed(2))
+	]);
+
+	worksheet.addRow([
+		"Calculated Energy for Macronutrient Distribution (%)",
+		parseFloat(((kcalProtein / kcalTotal) * 100).toFixed(2)),
+		parseFloat(((kcalFat / kcalTotal) * 100).toFixed(2)),
+		parseFloat(((kcalCarbs / kcalTotal) * 100).toFixed(2)),
+		100.0
+	]);
 };
 
 function ReportGenerator({ meals, nutrients }) {
@@ -70,7 +123,7 @@ function ReportGenerator({ meals, nutrients }) {
 		}
 
 		let workbook = new Excel.Workbook();
-		let worksheet = workbook.addWorksheet("");
+		let worksheet = workbook.addWorksheet("Nutrient Report");
 
 		let headers = [
 			{ header: "Food" },
@@ -85,6 +138,10 @@ function ReportGenerator({ meals, nutrients }) {
 		});
 
 		worksheet.columns = headers;
+
+		let totalProtein = 0;
+		let totalFat = 0;
+		let totalCarbs = 0;
 
 		// for each meal
 		//    for each food
@@ -108,7 +165,22 @@ function ReportGenerator({ meals, nutrients }) {
 						nutrient,
 						food
 					);
-					newRow.push(nutrientAmountPerFood);
+
+					if (nutrient.id === Macronutrients.PROTEIN) {
+						totalProtein += nutrientAmountPerFood;
+					} else if (nutrient.id === Macronutrients.FAT) {
+						totalFat += nutrientAmountPerFood;
+					} else if (nutrient.id === Macronutrients.CARBS) {
+						totalCarbs += nutrientAmountPerFood;
+					}
+
+					// Round result to 2 decimal points
+					newRow.push(
+						Math.round(
+							(nutrientAmountPerFood + Number.EPSILON) * 100
+						) / 100
+					);
+
 					console.log("Pushed new value, " + nutrientAmountPerFood);
 				}
 
@@ -116,6 +188,15 @@ function ReportGenerator({ meals, nutrients }) {
 			}
 
 			worksheet.addRow();
+		}
+
+		if (containsAllMacronutrients(nutrients)) {
+			writeMacronutrientReport(
+				workbook,
+				totalProtein,
+				totalFat,
+				totalCarbs
+			);
 		}
 
 		workbook.xlsx
