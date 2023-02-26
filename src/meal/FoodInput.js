@@ -31,7 +31,7 @@ function FoodInput({ meal, dispatch }) {
 										foodCode: food["food_code"],
 										description: food["food_description"],
 										quantity: undefined,
-										conversionFactor: 0.01 // default to gram conversion rate
+										conversion: 0.01 // default to gram conversion rate
 									};
 								})
 								.sort((a, b) => {
