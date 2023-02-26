@@ -75,7 +75,7 @@ function ReportGenerator({ meals, nutrients }) {
 		let headers = [
 			{ header: "Food" },
 			{ header: "Food Code" },
-			{ header: "Quantity" }
+			{ header: "Quantity (g)" }
 		];
 
 		nutrients.forEach((nutrient) => {
@@ -96,7 +96,11 @@ function ReportGenerator({ meals, nutrients }) {
 
 			for (let food of meal.foods) {
 				console.log(food);
-				let newRow = [food.description, food.foodCode, food.quantity];
+				let newRow = [
+					food.description,
+					food.foodCode,
+					food.quantity * food.conversion * 100 // specify quantity in grams
+				];
 
 				for (let nutrient of nutrients) {
 					console.log("Nutrient " + nutrient.name);
