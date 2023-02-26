@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { CardHeader, Grid, Card, CardContent, IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Macronutrients from "../enums/Macronutrients";
+import MacronutrientTooltip from "./MacronutrientTooltip";
 
 function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	const nutrientNamesUri =
@@ -81,8 +82,9 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 
 	return (
 		<Container>
-			<Grid item xs={12}>
+			<Grid item xs={12} display="flex" alignItems={"center"}>
 				<h2>Nutrients</h2>
+				<MacronutrientTooltip />
 			</Grid>
 			<Card
 				variant="outlined"
