@@ -5,11 +5,11 @@ import MealController from "./meal/MealController";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import NutrientSelect from "./nutrient/NutrientSelect";
-import ReportGenerator from "./report/ReportGenerator";
 import Theme from "./Theme";
 import Header from "./Header";
 import Footer from "./Footer";
 import mealReducer from "./MealReducer";
+import GenerateReportButton from "./report/GenerateReportButton";
 
 function App() {
 	const [meals, mealDispatch] = useReducer(mealReducer, [
@@ -39,7 +39,7 @@ function App() {
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<ReportGenerator
+					<GenerateReportButton
 						meals={meals}
 						nutrients={selectedNutrients}
 					/>
