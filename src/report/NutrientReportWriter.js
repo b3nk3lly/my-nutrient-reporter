@@ -46,71 +46,82 @@ const writeNutrientReport = async (meals, nutrients) => {
 	let headers = [
 		{ header: "Food" },
 		{ header: "Food Code" },
-		{ header: "Quantity (g)" }
+		{ header: "Quantity (g)", style: { numFmt: "0.00" } }
 	];
 
-	nutrients.forEach((nutrient) => {
+	for (let nutrient of nutrients) {
 		headers.push({
-			header: nutrient.name + " (" + nutrient.unit + ") "
+			header: nutrient.name + " (" + nutrient.unit + ") ",
+			style: { numFmt: "0.00" }
 		});
-	});
+	}
 
 	worksheet.columns = headers;
 
-	let totalProtein = 0;
-	let totalFat = 0;
-	let totalCarbs = 0;
-
-	// for each meal
-	//    for each food
-	//       for each nutrient
-	//          get the amount of the nutrient in the quantity of food
+	let grandTotals = {};
+	grandTotals["quantity"] = 0;
+	nutrients.forEach((nutrient) => (grandTotals[nutrient.id] = 0));
 
 	for (let meal of meals) {
+		let mealTotals = {};
+		mealTotals["quantity"] = 0;
+		nutrients.forEach((nutrient) => (mealTotals[nutrient.id] = 0));
+
 		worksheet.addRow([meal.name]);
 
 		for (let food of meal.foods) {
-			console.log(food);
-			let newRow = [
-				food.description,
-				food.foodCode,
-				food.quantity * food.conversion * 100 // specify quantity in grams
-			];
+			// calculate quantity in grams
+			let gramsQuantity = food.quantity * food.conversion * 100;
+
+			mealTotals["quantity"] += gramsQuantity;
+			grandTotals["quantity"] += gramsQuantity;
+
+			let newRow = [food.description, food.foodCode, gramsQuantity];
 
 			for (let nutrient of nutrients) {
-				console.log("Nutrient " + nutrient.name);
+				// calculate the amount of nutrient in food
 				let nutrientAmountPerFood = await getNutrientAmountPerFood(
 					nutrient,
 					food
 				);
 
-				if (nutrient.id === Macronutrients.PROTEIN) {
-					totalProtein += nutrientAmountPerFood;
-				} else if (nutrient.id === Macronutrients.FAT) {
-					totalFat += nutrientAmountPerFood;
-				} else if (nutrient.id === Macronutrients.CARBS) {
-					totalCarbs += nutrientAmountPerFood;
-				}
+				mealTotals[nutrient.id] += nutrientAmountPerFood;
+				grandTotals[nutrient.id] += nutrientAmountPerFood;
 
-				// Round result to 2 decimal points
-				newRow.push(
-					Math.round((nutrientAmountPerFood + Number.EPSILON) * 100) /
-						100
-				);
-
-				console.log("Pushed new value, " + nutrientAmountPerFood);
+				newRow.push(nutrientAmountPerFood);
 			}
 
 			worksheet.addRow(newRow);
 		}
 
+		// add totals of each nutrient for this meal
+		worksheet.addRow(
+			["Total", "", mealTotals["quantity"]].concat(
+				nutrients.map((nutrient) => mealTotals[nutrient.id])
+			)
+		);
+
 		worksheet.addRow();
 	}
 
+	// add totals of each nutrient for this meal
+	worksheet.addRow(
+		["Grand Total", "", grandTotals["quantity"]].concat(
+			nutrients.map((nutrient) => grandTotals[nutrient.id])
+		)
+	);
+
+	// write macronutrient report if all macronutrients are present
 	if (containsAllMacronutrients(nutrients)) {
-		writeMacronutrientReport(workbook, totalProtein, totalFat, totalCarbs);
+		writeMacronutrientReport(
+			workbook,
+			grandTotals[Macronutrients.PROTEIN],
+			grandTotals[Macronutrients.FAT],
+			grandTotals[Macronutrients.CARBS]
+		);
 	}
 
+	// save the report as a .xlsx
 	workbook.xlsx
 		.writeBuffer()
 		.then((data) => {
