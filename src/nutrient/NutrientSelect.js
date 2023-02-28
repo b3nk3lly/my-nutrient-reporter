@@ -84,7 +84,14 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	};
 
 	const clearNutrients = () => {
-		setSelectedNutrients([]);
+		if (
+			selectedNutrients.length > 0 &&
+			window.confirm(
+				"Are you sure you want to remove all selected nutrients?"
+			)
+		) {
+			setSelectedNutrients([]);
+		}
 	};
 
 	return (
@@ -125,9 +132,9 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 					}
 					action={
 						<Tooltip title="Clear All">
-						<IconButton onClick={clearNutrients}>
+							<IconButton onClick={clearNutrients}>
 								<ClearOutlinedIcon />
-						</IconButton>
+							</IconButton>
 						</Tooltip>
 					}
 				/>
