@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MealCard from "./MealCard";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Container, Grid, IconButton } from "@mui/material";
+import { Container, Grid, IconButton, Tooltip } from "@mui/material";
 import ReducerActions from "../enums/ReducerActions";
 
 function MealController({ meals, dispatch, foodOptions }) {
@@ -38,12 +38,14 @@ function MealController({ meals, dispatch, foodOptions }) {
 					);
 				})}
 				<Grid item>
-					<IconButton
-						onClick={addMeal}
-						sx={{ transform: "scale(1.2)" }}
-					>
-						<AddCircleOutlineIcon />
-					</IconButton>
+					<Tooltip title="Add Meal">
+						<IconButton
+							onClick={addMeal}
+							sx={{ transform: "scale(1.2)" }}
+						>
+							<AddCircleOutlineIcon />
+						</IconButton>
+					</Tooltip>
 				</Grid>
 			</Grid>
 		</Container>

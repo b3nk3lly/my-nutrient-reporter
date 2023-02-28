@@ -1,6 +1,12 @@
 import Grid from "@mui/material/Grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Card, CardContent, IconButton, Typography } from "@mui/material";
+import {
+	Card,
+	CardContent,
+	IconButton,
+	Tooltip,
+	Typography
+} from "@mui/material";
 import ReducerActions from "../enums/ReducerActions";
 import QuantityInput from "./QuantityInput";
 
@@ -27,9 +33,11 @@ function FoodCard({ meal, food, dispatch }) {
 						</Typography>
 					</Grid>
 					<Grid item xs={1}>
-						<IconButton onClick={removeFood}>
-							<DeleteOutlineIcon />
-						</IconButton>
+						<Tooltip title="Delete">
+							<IconButton onClick={removeFood}>
+								<DeleteOutlineIcon />
+							</IconButton>
+						</Tooltip>
 					</Grid>
 
 					{/* Bottom row */}

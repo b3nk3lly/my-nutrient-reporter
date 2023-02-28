@@ -3,8 +3,15 @@ import { Container } from "@mui/system";
 import Chip from "@mui/material/Chip";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
-import { CardHeader, Grid, Card, CardContent, IconButton } from "@mui/material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import {
+	CardHeader,
+	Grid,
+	Card,
+	CardContent,
+	IconButton,
+	Tooltip
+} from "@mui/material";
+import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import Macronutrients from "../enums/Macronutrients";
 import MacronutrientTooltip from "./MacronutrientTooltip";
 
@@ -117,9 +124,11 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 						/>
 					}
 					action={
+						<Tooltip title="Clear All">
 						<IconButton onClick={clearNutrients}>
-							<DeleteOutlineIcon />
+								<ClearOutlinedIcon />
 						</IconButton>
+						</Tooltip>
 					}
 				/>
 				{selectedNutrients.length > 0 ? (

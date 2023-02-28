@@ -6,7 +6,8 @@ import {
 	Card,
 	CardContent,
 	CardHeader,
-	Collapse
+	Collapse,
+	Tooltip
 } from "@mui/material";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -81,17 +82,21 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
 				}
 				action={
 					<div>
-						<IconButton onClick={removeMeal}>
-							<DeleteOutlineIcon />
-						</IconButton>
-						<IconButton onClick={toggleCollapsed}>
-							{/* Arrow direction depends on whether card is collapsed */}
-							{collapsed ? (
-								<KeyboardArrowDownOutlinedIcon />
-							) : (
-								<KeyboardArrowUpOutlinedIcon />
-							)}
-						</IconButton>
+						<Tooltip title="Delete Meal">
+							<IconButton onClick={removeMeal}>
+								<DeleteOutlineIcon />
+							</IconButton>
+						</Tooltip>
+						<Tooltip title={collapsed ? "Expand" : "Collapse"}>
+							<IconButton onClick={toggleCollapsed}>
+								{/* Arrow direction depends on whether card is collapsed */}
+								{collapsed ? (
+									<KeyboardArrowDownOutlinedIcon />
+								) : (
+									<KeyboardArrowUpOutlinedIcon />
+								)}
+							</IconButton>
+						</Tooltip>
 					</div>
 				}
 			/>
