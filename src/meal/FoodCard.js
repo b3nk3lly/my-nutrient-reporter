@@ -13,8 +13,6 @@ import QuantityInput from "./QuantityInput";
 function FoodCard({ meal, food, dispatch }) {
 	// Remove the food item when the Remove button is clicked
 	const removeFood = () => {
-		console.log("Removing food code " + food.foodCode);
-
 		dispatch({
 			type: ReducerActions.REMOVE_FOOD,
 			payload: { meal: meal, foodCode: food.foodCode }

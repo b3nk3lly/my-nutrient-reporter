@@ -44,12 +44,13 @@ const mealReducer = (meals, action) => {
 			let mealIndex = meals.findIndex(
 				(meal) => meal.id === action.payload.meal.id
 			);
+
 			let foodIndex = meals[mealIndex].foods.findIndex(
 				(food) => food.foodCode === action.payload.food.foodCode
 			);
+
 			meals[mealIndex].foods[foodIndex].quantity =
 				action.payload.quantity;
-			console.log("Set quantity to " + action.payload.quantity);
 			return meals;
 		}
 
@@ -57,12 +58,14 @@ const mealReducer = (meals, action) => {
 			let mealIndex = meals.findIndex(
 				(meal) => meal.id === action.payload.meal.id
 			);
+
 			let foodIndex = meals[mealIndex].foods.findIndex(
 				(food) => food.foodCode === action.payload.food.foodCode
 			);
+
 			meals[mealIndex].foods[foodIndex].conversion =
 				action.payload.conversion;
-			console.log("Set conversion to " + action.payload.conversion);
+
 			return meals;
 		}
 

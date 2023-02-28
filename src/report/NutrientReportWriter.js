@@ -20,8 +20,6 @@ const containsAllMacronutrients = (nutrients) => {
 
 const getNutrientAmountPerFood = async (nutrient, food) => {
 	let response = await fetch(nutrientAmountUri + food.foodCode);
-	console.log(nutrientAmountUri + food.foodCode);
-	console.log(nutrient.id);
 	let json = await response.json();
 
 	// get the nutrient with id that matches the one we're looking for
@@ -30,10 +28,6 @@ const getNutrientAmountPerFood = async (nutrient, food) => {
 	);
 
 	let nutrientAmount = relevantResult ? relevantResult["nutrient_value"] : 0;
-
-	console.log("amount: " + nutrientAmount);
-	console.log("conversion: " + food.conversion);
-	console.log("quantity: " + food.quantity);
 
 	// calculate amount of the nutrient per food
 	return nutrientAmount * food.conversion * food.quantity;
@@ -127,7 +121,6 @@ const writeNutrientReport = async (meals, nutrients) => {
 		.then((data) => {
 			let blob = new Blob([data]);
 			FileSaver.saveAs(blob, "Nutrient Report.xlsx");
-			console.log("Generated report.");
 		})
 		.catch((error) => console.log(error));
 };

@@ -75,7 +75,6 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 	};
 
 	const handleDelete = (deletedNutrient) => () => {
-		console.log(deletedNutrient);
 		let newNutrients = selectedNutrients.filter(
 			(nutrient) => nutrient.id !== deletedNutrient.id
 		);

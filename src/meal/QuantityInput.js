@@ -11,7 +11,6 @@ function QuantityInput({ meal, food, dispatch }) {
 
 	const handleQuantityChange = (event) => {
 		let _quantity = event.target.value;
-		console.log("Setting quantity to " + _quantity);
 
 		if (!_quantity) {
 			setValidity(QuantityValidity.EMPTY);
@@ -28,8 +27,6 @@ function QuantityInput({ meal, food, dispatch }) {
 
 	// Set quantity based on the textbox
 	const dispatchQuantity = () => {
-		console.log("Dispatching quantity " + quantity);
-
 		dispatch({
 			type: ReducerActions.UPDATE_QUANTITY,
 			payload: { meal: meal, food: food, quantity: quantity }

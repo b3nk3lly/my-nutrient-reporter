@@ -68,7 +68,6 @@ function FoodInput({ meal, dispatch }) {
 
 	// Adds a food to the meal
 	const addFood = (newFood) => {
-		console.log("Adding food " + newFood.foodCode);
 		dispatch({
 			type: ReducerActions.ADD_FOOD,
 			payload: { meal: meal, food: newFood }

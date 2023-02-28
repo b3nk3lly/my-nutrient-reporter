@@ -26,7 +26,6 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
 
 	// Update meal name based on user input
 	const updateName = (event) => {
-		console.log("Setting meal name to " + event.target.value);
 		dispatch({
 			type: ReducerActions.UPDATE_NAME,
 			payload: { meal: meal, name: event.target.value }
@@ -38,7 +37,6 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
 	 * Does nothing if this is the only meal.
 	 */
 	const removeMeal = () => {
-		console.log(isOnlyMeal);
 		if (
 			!isOnlyMeal &&
 			(meal.foods.length === 0 ||

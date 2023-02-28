@@ -10,7 +10,6 @@ function ServingUnit({ meal, food, dispatch }) {
 
 	// Set conversion factor based on serving size dropdown
 	const handleUnitChange = (event) => {
-		console.log("Setting conversion factor to " + event.target.value);
 		dispatch({
 			type: ReducerActions.UPDATE_CONVERSION,
 			payload: { meal: meal, food: food, conversion: event.target.value }
@@ -70,7 +69,6 @@ function ServingUnit({ meal, food, dispatch }) {
 			setUnits(units);
 		};
 
-		console.log("Fetching serving sizes for food ID" + food.foodCode);
 		fetch(servingSizesUri + food.foodCode) // fetch serving sizes for the food ID
 			.then((result) => result.json())
 			.then((json) => processUnits(json));
