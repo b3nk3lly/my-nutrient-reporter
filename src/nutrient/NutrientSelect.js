@@ -61,7 +61,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 		}
 
 		fetchNutrients();
-	}, []);
+	}, [setSelectedNutrients]);
 
 	/**
 	 * 	Returns true if and only if the nutrient is already selected
