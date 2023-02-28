@@ -9,7 +9,7 @@ import writeNutrientReport from "./NutrientReportWriter";
  */
 const validate = (meals, nutrients) => {
 	for (let meal of meals) {
-		let mealName = meal.name == "" ? "Untitled Meal" : meal.name;
+		let mealName = meal.name === "" ? "Untitled Meal" : meal.name;
 
 		if (meal.foods.length === 0) {
 			window.alert(

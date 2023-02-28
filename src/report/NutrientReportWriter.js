@@ -26,7 +26,7 @@ const getNutrientAmountPerFood = async (nutrient, food) => {
 
 	// get the nutrient with id that matches the one we're looking for
 	let relevantResult = json.find(
-		(result) => result["nutrient_name_id"] == nutrient.id
+		(result) => result["nutrient_name_id"] === nutrient.id
 	);
 
 	let nutrientAmount = relevantResult ? relevantResult["nutrient_value"] : 0;
