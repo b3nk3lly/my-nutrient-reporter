@@ -7,11 +7,11 @@ const writeMacronutrientReport = (
 	let worksheet = workbook.addWorksheet("Macronutrient Report");
 
 	worksheet.columns = [
-		{ header: "Macronutrient Distribution" },
-		{ header: "Protein" },
-		{ header: "Fat" },
-		{ header: "Carbohydrates" },
-		{ header: "Total" }
+		{ header: "Macronutrient Distribution", style: { numFmt: "0.00" } },
+		{ header: "Protein", style: { numFmt: "0.00" } },
+		{ header: "Fat", style: { numFmt: "0.00" } },
+		{ header: "Carbohydrates", style: { numFmt: "0.00" } },
+		{ header: "Total", style: { numFmt: "0.00" } }
 	];
 
 	let KCALS_PER_GRAM_PROTEIN = 4;
@@ -25,17 +25,17 @@ const writeMacronutrientReport = (
 
 	worksheet.addRow([
 		"Calculated Energy for Macronutrient Distribution (kCal)",
-		parseFloat(kcalProtein.toFixed(2)),
-		parseFloat(kcalFat.toFixed(2)),
-		parseFloat(kcalCarbs.toFixed(2)),
-		parseFloat(kcalTotal.toFixed(2))
+		kcalProtein,
+		kcalFat,
+		kcalCarbs,
+		kcalTotal
 	]);
 
 	worksheet.addRow([
 		"Calculated Energy for Macronutrient Distribution (%)",
-		parseFloat(((kcalProtein / kcalTotal) * 100).toFixed(2)),
-		parseFloat(((kcalFat / kcalTotal) * 100).toFixed(2)),
-		parseFloat(((kcalCarbs / kcalTotal) * 100).toFixed(2)),
+		(kcalProtein / kcalTotal) * 100,
+		(kcalFat / kcalTotal) * 100,
+		(kcalCarbs / kcalTotal) * 100,
 		100.0
 	]);
 };
