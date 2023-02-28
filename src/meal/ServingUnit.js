@@ -46,8 +46,6 @@ function ServingUnit({ meal, food, dispatch }) {
 					unit["measure_name"] = unit["measure_name"]
 						.replace(quantityRegex, "") // remove quantity
 						.replace(/s$/, "") // remove trailing s
-						//.replace(/^g\b/, "grams")
-						//.replace(/^ml\b/, "millilitres")
 						.trim();
 
 					return unit;

@@ -100,11 +100,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 				<h2>Nutrients</h2>
 				<MacronutrientTooltip />
 			</Grid>
-			<Card
-				variant="outlined"
-				//style={{ borderColor: "#e1eedd" }}
-				sx={{ border: 2, borderRadius: 5 }}
-			>
+			<Card variant="outlined" sx={{ border: 2, borderRadius: 5 }}>
 				<CardHeader
 					title={
 						<Autocomplete
