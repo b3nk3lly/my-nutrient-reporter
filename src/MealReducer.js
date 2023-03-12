@@ -43,7 +43,9 @@ const mealReducer = (meals, action) => {
         case ReducerActions.UPDATE_QUANTITY: {
             const foodToUpdate = meals
                 .find((meal) => meal.id === action.payload.meal.id)
-                .find((food) => food.foodCode === action.payload.food.foodCode);
+                .foods.find(
+                    (food) => food.foodCode === action.payload.food.foodCode
+                );
 
             foodToUpdate.quantity = action.payload.quantity;
 
@@ -53,7 +55,9 @@ const mealReducer = (meals, action) => {
         case ReducerActions.UPDATE_CONVERSION: {
             const foodToUpdate = meals
                 .find((meal) => meal.id === action.payload.meal.id)
-                .find((food) => food.foodCode === action.payload.food.foodCode);
+                .foods.find(
+                    (food) => food.foodCode === action.payload.food.foodCode
+                );
 
             foodToUpdate.conversion = action.payload.conversion;
 
