@@ -11,8 +11,8 @@ import {
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import Grid from '@mui/material/Grid';
-import FoodInput from './FoodInput';
-import FoodCard from './FoodCard';
+import FoodInput from '../food/FoodInput';
+import FoodCard from '../food/FoodCard';
 import ReducerActions from '../enums/ReducerActions';
 import DeleteMealButton from './DeleteMealButton';
 
