@@ -21,13 +21,13 @@ function DeleteMealButton({ meal, dispatch, isDisabled }) {
     };
 
     return (
-        <span disabled={isDisabled}>
-            <Tooltip title="Delete Meal">
-                <IconButton onClick={removeMeal}>
+        <Tooltip title={isDisabled ? '' : 'Delete Meal'}>
+            <span>
+                <IconButton onClick={removeMeal} disabled={isDisabled}>
                     <DeleteOutlineIcon />
                 </IconButton>
-            </Tooltip>
-        </span>
+            </span>
+        </Tooltip>
     );
 }
 

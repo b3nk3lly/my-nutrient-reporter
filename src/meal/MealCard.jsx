@@ -10,11 +10,11 @@ import {
 } from '@mui/material';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Grid from '@mui/material/Grid';
 import FoodInput from './FoodInput';
 import FoodCard from './FoodCard';
 import ReducerActions from '../enums/ReducerActions';
+import DeleteMealButton from './DeleteMealButton';
 
 function MealCard({ meal, dispatch, isOnlyMeal }) {
     const [name, setName] = useState(meal.name);
@@ -30,23 +30,6 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
             type: ReducerActions.UPDATE_NAME,
             payload: { meal, name: event.target.value }
         });
-    };
-
-    /**
-     * Removes a meal. Prompts the user with a confirmation dialog if the meal contains any food.
-     * Does nothing if this is the only meal.
-     */
-    const removeMeal = () => {
-        if (
-            meal.foods.length === 0 ||
-            window.confirm(
-                `Are you sure you want to delete ${
-                    name === '' ? 'Untitled Meal' : name
-                }?`
-            )
-        ) {
-            dispatch({ type: ReducerActions.REMOVE_MEAL, payload: meal });
-        }
     };
 
     const toggleCollapsed = () => {
@@ -74,13 +57,11 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
                 }
                 action={
                     <div>
-                        <span disabled={isOnlyMeal}>
-                            <Tooltip title="Delete Meal">
-                                <IconButton onClick={removeMeal}>
-                                    <DeleteOutlineIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </span>
+                        <DeleteMealButton
+                            meal={meal}
+                            dispatch={dispatch}
+                            isDisabled={isOnlyMeal}
+                        />
                         <Tooltip title={collapsed ? 'Expand' : 'Collapse'}>
                             <IconButton onClick={toggleCollapsed}>
                                 {/* Arrow direction depends on whether card is collapsed */}
