@@ -13,7 +13,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Grid from '@mui/material/Grid';
 import FoodInput from './FoodInput';
-import FoodList from './FoodList';
+import FoodCard from './FoodCard';
 import ReducerActions from '../enums/ReducerActions';
 
 function MealCard({ meal, dispatch, isOnlyMeal }) {
@@ -101,7 +101,17 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
                             <FoodInput meal={meal} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={12}>
-                            <FoodList meal={meal} dispatch={dispatch} />
+                            <Grid container rowSpacing={3}>
+                                {meal.foods.map((food) => (
+                                    <Grid item xs={12} key={food.foodCode}>
+                                        <FoodCard
+                                            meal={meal}
+                                            food={food}
+                                            dispatch={dispatch}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </CardContent>
