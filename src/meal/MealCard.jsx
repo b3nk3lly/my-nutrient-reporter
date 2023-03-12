@@ -1,7 +1,6 @@
 import { React, useState } from 'react';
 import {
     IconButton,
-    TextField,
     Card,
     CardContent,
     CardHeader,
@@ -13,24 +12,11 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import Grid from '@mui/material/Grid';
 import FoodInput from '../food/FoodInput';
 import FoodCard from '../food/FoodCard';
-import ReducerActions from '../enums/ReducerActions';
 import DeleteMealButton from './DeleteMealButton';
+import MealNameInput from './MealNameInput';
 
 function MealCard({ meal, dispatch, isOnlyMeal }) {
-    const [name, setName] = useState(meal.name);
     const [collapsed, setCollapsed] = useState(false);
-
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    };
-
-    // Update meal name based on user input
-    const updateName = (event) => {
-        dispatch({
-            type: ReducerActions.UPDATE_NAME,
-            payload: { meal, name: event.target.value }
-        });
-    };
 
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
@@ -39,22 +25,7 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
     return (
         <Card variant="outlined" sx={{ border: 2, borderRadius: 5 }}>
             <CardHeader
-                title={
-                    <TextField
-                        id="standard-basic"
-                        autoComplete="off"
-                        variant="standard"
-                        placeholder="Untitled Meal"
-                        value={name}
-                        onChange={handleNameChange}
-                        onBlur={updateName}
-                        InputProps={{
-                            style: {
-                                color: '#183a1d'
-                            }
-                        }}
-                    />
-                }
+                title={<MealNameInput meal={meal} dispatch={dispatch} />}
                 action={
                     <div>
                         <DeleteMealButton
