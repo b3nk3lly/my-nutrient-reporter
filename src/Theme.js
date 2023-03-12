@@ -1,11 +1,7 @@
 import { alpha, createTheme } from '@mui/material/styles';
 
 function Theme() {
-    const lightGreen = '#e1eedd';
     const darkGreen = '#183a1d';
-    const orange = '#f0a04b';
-    const beige = '#fefbe9';
-    const yellow = '#f6c453';
 
     return createTheme({
         components: {
