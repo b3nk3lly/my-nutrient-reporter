@@ -1,5 +1,5 @@
 import { Autocomplete, TextField, createFilterOptions } from '@mui/material';
-import { React, useState, Fragment, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import ReducerActions from '../enums/ReducerActions';
 
@@ -106,7 +106,7 @@ function FoodInput({ meal, dispatch }) {
                     InputProps={{
                         ...params.InputProps,
                         endAdornment: (
-                            <Fragment>
+                            <>
                                 {loading ? (
                                     <CircularProgress
                                         color="inherit"
@@ -114,7 +114,7 @@ function FoodInput({ meal, dispatch }) {
                                     />
                                 ) : null}
                                 {params.InputProps.endAdornment}
-                            </Fragment>
+                            </>
                         )
                     }}
                 />
