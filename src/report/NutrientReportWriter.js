@@ -40,12 +40,12 @@ const writeNutrientReport = async (meals, nutrients) => {
         { header: 'Quantity (g)', style: { numFmt: '0.00' } }
     ];
 
-    for (const nutrient of nutrients) {
+    nutrients.forEach((nutrient) =>
         headers.push({
             header: `${nutrient.name} (${nutrient.unit}) `,
             style: { numFmt: '0.00' }
-        });
-    }
+        })
+    );
 
     worksheet.columns = headers;
 
@@ -53,14 +53,14 @@ const writeNutrientReport = async (meals, nutrients) => {
     grandTotals.quantity = 0;
     nutrients.forEach((nutrient) => (grandTotals[nutrient.id] = 0));
 
-    for (const meal of meals) {
+    meals.forEach(async (meal) => {
         const mealTotals = {};
         mealTotals.quantity = 0;
         nutrients.forEach((nutrient) => (mealTotals[nutrient.id] = 0));
 
         worksheet.addRow([meal.name]);
 
-        for (const food of meal.foods) {
+        meal.foods.forEach(async (food) => {
             // calculate quantity in grams
             const gramsQuantity = food.quantity * food.conversion * 100;
 
@@ -69,7 +69,7 @@ const writeNutrientReport = async (meals, nutrients) => {
 
             const newRow = [food.description, food.foodCode, gramsQuantity];
 
-            for (const nutrient of nutrients) {
+            nutrients.forEach(async (nutrient) => {
                 // calculate the amount of nutrient in food
                 const nutrientAmountPerFood = await getNutrientAmountPerFood(
                     nutrient,
@@ -80,10 +80,10 @@ const writeNutrientReport = async (meals, nutrients) => {
                 grandTotals[nutrient.id] += nutrientAmountPerFood;
 
                 newRow.push(nutrientAmountPerFood);
-            }
+            });
 
             worksheet.addRow(newRow);
-        }
+        });
 
         // add totals of each nutrient for this meal
         worksheet.addRow(
@@ -93,7 +93,7 @@ const writeNutrientReport = async (meals, nutrients) => {
         );
 
         worksheet.addRow();
-    }
+    });
 
     // add totals of each nutrient for this meal
     worksheet.addRow(
