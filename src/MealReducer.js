@@ -41,30 +41,21 @@ const mealReducer = (meals, action) => {
             });
 
         case ReducerActions.UPDATE_QUANTITY: {
-            const mealIndex = meals.findIndex(
-                (meal) => meal.id === action.payload.meal.id
-            );
+            const foodToUpdate = meals
+                .find((meal) => meal.id === action.payload.meal.id)
+                .find((food) => food.foodCode === action.payload.food.foodCode);
 
-            const foodIndex = meals[mealIndex].foods.findIndex(
-                (food) => food.foodCode === action.payload.food.foodCode
-            );
+            foodToUpdate.quantity = action.payload.quantity;
 
-            meals[mealIndex].foods[foodIndex].quantity =
-                action.payload.quantity;
             return meals;
         }
 
         case ReducerActions.UPDATE_CONVERSION: {
-            const mealIndex = meals.findIndex(
-                (meal) => meal.id === action.payload.meal.id
-            );
+            const foodToUpdate = meals
+                .find((meal) => meal.id === action.payload.meal.id)
+                .find((food) => food.foodCode === action.payload.food.foodCode);
 
-            const foodIndex = meals[mealIndex].foods.findIndex(
-                (food) => food.foodCode === action.payload.food.foodCode
-            );
-
-            meals[mealIndex].foods[foodIndex].conversion =
-                action.payload.conversion;
+            foodToUpdate.conversion = action.payload.conversion;
 
             return meals;
         }
