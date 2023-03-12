@@ -70,7 +70,7 @@ function FoodInput({ meal, dispatch }) {
     const addFood = (newFood) => {
         dispatch({
             type: ReducerActions.ADD_FOOD,
-            payload: { meal: meal, food: newFood }
+            payload: { meal, food: newFood }
         });
     };
 

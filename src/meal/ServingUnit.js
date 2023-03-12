@@ -12,7 +12,7 @@ function ServingUnit({ meal, food, dispatch }) {
     const handleUnitChange = (event) => {
         dispatch({
             type: ReducerActions.UPDATE_CONVERSION,
-            payload: { meal: meal, food: food, conversion: event.target.value }
+            payload: { meal, food, conversion: event.target.value }
         });
     };
 

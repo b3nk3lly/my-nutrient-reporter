@@ -29,7 +29,7 @@ function QuantityInput({ meal, food, dispatch }) {
     const dispatchQuantity = () => {
         dispatch({
             type: ReducerActions.UPDATE_QUANTITY,
-            payload: { meal: meal, food: food, quantity: quantity }
+            payload: { meal, food, quantity }
         });
     };
 

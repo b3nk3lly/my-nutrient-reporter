@@ -28,7 +28,7 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
     const updateName = (event) => {
         dispatch({
             type: ReducerActions.UPDATE_NAME,
-            payload: { meal: meal, name: event.target.value }
+            payload: { meal, name: event.target.value }
         });
     };
 
