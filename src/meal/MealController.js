@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
-import MealCard from './MealCard';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Container, Grid, IconButton, Tooltip } from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
+import MealCard from './MealCard';
 
 function MealController({ meals, dispatch, foodOptions }) {
     const [nextMealKey, setNextMealKey] = useState(1);

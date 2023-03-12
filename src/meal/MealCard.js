@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-import FoodInput from './FoodInput';
 import {
     IconButton,
     TextField,
@@ -13,6 +12,7 @@ import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutl
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Grid from '@mui/material/Grid';
+import FoodInput from './FoodInput';
 import FoodList from './FoodList';
 import ReducerActions from '../enums/ReducerActions';
 
