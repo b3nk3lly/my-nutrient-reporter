@@ -4,7 +4,7 @@ import { Container, Grid, IconButton, Tooltip } from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
 import MealCard from './MealCard';
 
-function MealController({ meals, dispatch, foodOptions }) {
+function MealController({ meals, dispatch }) {
     const [nextMealKey, setNextMealKey] = useState(1);
 
     const addMeal = () => {

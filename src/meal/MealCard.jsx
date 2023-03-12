@@ -70,11 +70,6 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
                                 color: '#183a1d'
                             }
                         }}
-                        inputProps={{
-                            style: {
-                                color: '#183a1d'
-                            }
-                        }}
                     />
                 }
                 action={
