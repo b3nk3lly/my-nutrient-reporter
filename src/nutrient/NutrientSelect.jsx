@@ -36,12 +36,12 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
     // Fetch nutrient list when page loads
     useEffect(() => {
         async function fetchNutrients() {
-            let result = await fetch(nutrientNamesUri); // fetch nutrients
-            let json = await result.json(); // convert to JSON
+            const result = await fetch(nutrientNamesUri); // fetch nutrients
+            const json = await result.json(); // convert to JSON
 
             // find the macronutrients Protein, Total Fat, and Carbohydrates
             // and have them selected by default
-            let macronutrients = json
+            const macronutrients = json
                 .filter((nutrient) =>
                     [
                         Macronutrients.PROTEIN,
@@ -75,7 +75,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
     };
 
     const handleDelete = (deletedNutrient) => () => {
-        let newNutrients = selectedNutrients.filter(
+        const newNutrients = selectedNutrients.filter(
             (nutrient) => nutrient.id !== deletedNutrient.id
         );
 

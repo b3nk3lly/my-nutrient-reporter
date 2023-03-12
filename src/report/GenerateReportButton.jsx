@@ -9,8 +9,8 @@ import writeNutrientReport from './NutrientReportWriter';
  * If any of these criteria are not met, an alert is displayed.
  */
 const validate = (meals, nutrients) => {
-    for (let meal of meals) {
-        let mealName = meal.name === '' ? 'Untitled Meal' : meal.name;
+    for (const meal of meals) {
+        const mealName = meal.name === '' ? 'Untitled Meal' : meal.name;
 
         if (meal.foods.length === 0) {
             window.alert(
@@ -19,7 +19,7 @@ const validate = (meals, nutrients) => {
             return false;
         }
 
-        for (let food of meal.foods) {
+        for (const food of meal.foods) {
             if (!food.quantity || food.quantity === 0) {
                 window.alert(
                     `Please enter a quantity for ${food.description} in ${mealName}`
