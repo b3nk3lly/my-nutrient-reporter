@@ -10,19 +10,19 @@ function QuantityInput({ meal, food, dispatch }) {
     const [validity, setValidity] = useState(QuantityValidity.VALID);
 
     const handleQuantityChange = (event) => {
-        const _quantity = event.target.value;
+        const newQuantity = event.target.value;
 
-        if (!_quantity) {
+        if (!newQuantity) {
             setValidity(QuantityValidity.EMPTY);
-        } else if (Number.isNaN(_quantity)) {
+        } else if (Number.isNaN(newQuantity)) {
             setValidity(QuantityValidity.NAN);
-        } else if (_quantity <= 0) {
+        } else if (newQuantity <= 0) {
             setValidity(QuantityValidity.NON_POSITIVE);
         } else {
             setValidity(QuantityValidity.VALID);
         }
 
-        setQuantity(_quantity);
+        setQuantity(newQuantity);
     };
 
     // Set quantity based on the textbox
