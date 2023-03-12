@@ -92,7 +92,7 @@ function ServingUnit({ meal, food, dispatch }) {
                 units.map((unit, index) => {
                     return (
                         <MenuItem
-                            key={food.foodCode + '-' + index}
+                            key={`${food.foodCode}-${index}`}
                             value={unit['conversion_factor_value']}
                         >
                             {unit['measure_name']}

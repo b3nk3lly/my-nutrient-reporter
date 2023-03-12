@@ -16,7 +16,7 @@ function FoodCard({ meal, food, dispatch }) {
     const removeFood = () => {
         dispatch({
             type: ReducerActions.REMOVE_FOOD,
-            payload: { meal: meal, foodCode: food.foodCode }
+            payload: { meal, foodCode: food.foodCode }
         });
     };
 
@@ -28,7 +28,7 @@ function FoodCard({ meal, food, dispatch }) {
                     <Grid item xs={11}>
                         <Typography>{food.description}</Typography>
                         <Typography variant="caption">
-                            {'Food code: ' + food.foodCode}
+                            {`Food code: ${food.foodCode}`}
                         </Typography>
                     </Grid>
                     <Grid item xs={1}>

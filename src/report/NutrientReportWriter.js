@@ -47,7 +47,7 @@ const writeNutrientReport = async (meals, nutrients) => {
 
     for (const nutrient of nutrients) {
         headers.push({
-            header: nutrient.name + ' (' + nutrient.unit + ') ',
+            header: `${nutrient.name} (${nutrient.unit}) `,
             style: { numFmt: '0.00' }
         });
     }
