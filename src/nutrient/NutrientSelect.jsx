@@ -25,10 +25,10 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
      * Maps JSON to a nutrient.
      */
     const newNutrient = (nutrient) => ({
-        key: nutrient['nutrient_name_id'],
-        id: nutrient['nutrient_name_id'],
-        name: nutrient['nutrient_web_name'],
-        unit: nutrient['unit']
+        key: nutrient.nutrient_name_id,
+        id: nutrient.nutrient_name_id,
+        name: nutrient.nutrient_web_name,
+        unit: nutrient.unit
     });
 
     // Fetch nutrient list when page loads
@@ -45,7 +45,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
                         Macronutrients.PROTEIN,
                         Macronutrients.FAT,
                         Macronutrients.CARBS
-                    ].includes(nutrient['nutrient_name_id'])
+                    ].includes(nutrient.nutrient_name_id)
                 )
                 .map(newNutrient);
 

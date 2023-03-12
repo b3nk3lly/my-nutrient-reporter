@@ -21,12 +21,10 @@ const getNutrientAmountPerFood = async (nutrient, food) => {
 
     // get the nutrient with id that matches the one we're looking for
     const relevantResult = json.find(
-        (result) => result['nutrient_name_id'] === nutrient.id
+        (result) => result.nutrient_name_id === nutrient.id
     );
 
-    const nutrientAmount = relevantResult
-        ? relevantResult['nutrient_value']
-        : 0;
+    const nutrientAmount = relevantResult ? relevantResult.nutrient_value : 0;
 
     // calculate amount of the nutrient per food
     return nutrientAmount * food.conversion * food.quantity;
@@ -52,12 +50,12 @@ const writeNutrientReport = async (meals, nutrients) => {
     worksheet.columns = headers;
 
     const grandTotals = {};
-    grandTotals['quantity'] = 0;
+    grandTotals.quantity = 0;
     nutrients.forEach((nutrient) => (grandTotals[nutrient.id] = 0));
 
     for (const meal of meals) {
         const mealTotals = {};
-        mealTotals['quantity'] = 0;
+        mealTotals.quantity = 0;
         nutrients.forEach((nutrient) => (mealTotals[nutrient.id] = 0));
 
         worksheet.addRow([meal.name]);
@@ -66,8 +64,8 @@ const writeNutrientReport = async (meals, nutrients) => {
             // calculate quantity in grams
             const gramsQuantity = food.quantity * food.conversion * 100;
 
-            mealTotals['quantity'] += gramsQuantity;
-            grandTotals['quantity'] += gramsQuantity;
+            mealTotals.quantity += gramsQuantity;
+            grandTotals.quantity += gramsQuantity;
 
             const newRow = [food.description, food.foodCode, gramsQuantity];
 
@@ -89,7 +87,7 @@ const writeNutrientReport = async (meals, nutrients) => {
 
         // add totals of each nutrient for this meal
         worksheet.addRow(
-            ['Total', '', mealTotals['quantity']].concat(
+            ['Total', '', mealTotals.quantity].concat(
                 nutrients.map((nutrient) => mealTotals[nutrient.id])
             )
         );
@@ -99,7 +97,7 @@ const writeNutrientReport = async (meals, nutrients) => {
 
     // add totals of each nutrient for this meal
     worksheet.addRow(
-        ['Grand Total', '', grandTotals['quantity']].concat(
+        ['Grand Total', '', grandTotals.quantity].concat(
             nutrients.map((nutrient) => grandTotals[nutrient.id])
         )
     );

@@ -22,15 +22,13 @@ function ServingUnit({ meal, food, dispatch }) {
         const processUnits = (processedUnits) => {
             processedUnits = processedUnits
                 // filter out meaningless serving sizes
-                .filter(
-                    (unit) => unit['measure_name'] !== 'no serving specified'
-                )
+                .filter((unit) => unit.measure_name !== 'no serving specified')
                 // filter options that include a number of grams measurement
-                .filter((unit) => !/[0-9]+g/.test(unit['measure_name']))
+                .filter((unit) => !/[0-9]+g/.test(unit.measure_name))
                 // simplify unit options
                 .map((unit) => {
                     // get the quantity of the serving size
-                    let quantity = unit['measure_name'].match(quantityRegex)[0];
+                    let quantity = unit.measure_name.match(quantityRegex)[0];
 
                     // if it's a fraction, compute the fraction
                     if (quantity.includes('/')) {
@@ -39,10 +37,10 @@ function ServingUnit({ meal, food, dispatch }) {
                     }
 
                     // calculate the conversion factor per single unit
-                    unit['conversion_factor_value'] /= quantity;
+                    unit.conversion_factor_value /= quantity;
 
                     // format unit name
-                    unit['measure_name'] = unit['measure_name']
+                    unit.measure_name = unit.measure_name
                         .replace(quantityRegex, '') // remove quantity
                         .replace(/s$/, '') // remove trailing s
                         .trim();
@@ -53,19 +51,19 @@ function ServingUnit({ meal, food, dispatch }) {
                 .filter(
                     (v, i, a) =>
                         a.findIndex(
-                            (v2) => v2['measure_name'] === v['measure_name']
+                            (v2) => v2.measure_name === v.measure_name
                         ) === i
                 );
 
             // if there is a unit for grams, remove it.
             // we hard-code this as the default
             processedUnits = processedUnits.filter(
-                (unit) => unit['measure_name'] !== 'g'
+                (unit) => unit.measure_name !== 'g'
             );
 
             // sort units alphabetically
             processedUnits = processedUnits.sort((a, b) =>
-                a['measure_name'] > b['measure_name'] ? 1 : -1
+                a.measure_name > b.measure_name ? 1 : -1
             );
 
             setUnits(processedUnits);
@@ -94,9 +92,9 @@ function ServingUnit({ meal, food, dispatch }) {
                 units.map((unit, index) => (
                     <MenuItem
                         key={`${food.foodCode}-${index}`}
-                        value={unit['conversion_factor_value']}
+                        value={unit.conversion_factor_value}
                     >
-                        {unit['measure_name']}
+                        {unit.measure_name}
                     </MenuItem>
                 ))
             }

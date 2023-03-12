@@ -27,8 +27,8 @@ function FoodInput({ meal, dispatch }) {
                         setOptions(
                             json
                                 .map((foodOption) => ({
-                                    foodCode: foodOption['food_code'],
-                                    description: foodOption['food_description'],
+                                    foodCode: foodOption.food_code,
+                                    description: foodOption.food_description,
                                     quantity: undefined,
                                     conversion: 0.01 // default to gram conversion rate
                                 }))
