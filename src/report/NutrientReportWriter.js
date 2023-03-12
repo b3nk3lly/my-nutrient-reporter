@@ -51,12 +51,16 @@ const writeNutrientReport = async (meals, nutrients) => {
 
     const grandTotals = {};
     grandTotals.quantity = 0;
-    nutrients.forEach((nutrient) => (grandTotals[nutrient.id] = 0));
+    nutrients.forEach((nutrient) => {
+        grandTotals[nutrient.id] = 0;
+    });
 
     meals.forEach(async (meal) => {
         const mealTotals = {};
         mealTotals.quantity = 0;
-        nutrients.forEach((nutrient) => (mealTotals[nutrient.id] = 0));
+        nutrients.forEach((nutrient) => {
+            mealTotals[nutrient.id] = 0;
+        });
 
         worksheet.addRow([meal.name]);
 
