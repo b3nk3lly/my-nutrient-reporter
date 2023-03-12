@@ -19,31 +19,33 @@ const containsAllMacronutrients = (nutrients) => {
 };
 
 const getNutrientAmountPerFood = async (nutrient, food) => {
-    let response = await fetch(nutrientAmountUri + food.foodCode);
-    let json = await response.json();
+    const response = await fetch(nutrientAmountUri + food.foodCode);
+    const json = await response.json();
 
     // get the nutrient with id that matches the one we're looking for
-    let relevantResult = json.find(
+    const relevantResult = json.find(
         (result) => result['nutrient_name_id'] === nutrient.id
     );
 
-    let nutrientAmount = relevantResult ? relevantResult['nutrient_value'] : 0;
+    const nutrientAmount = relevantResult
+        ? relevantResult['nutrient_value']
+        : 0;
 
     // calculate amount of the nutrient per food
     return nutrientAmount * food.conversion * food.quantity;
 };
 
 const writeNutrientReport = async (meals, nutrients) => {
-    let workbook = new Excel.Workbook();
-    let worksheet = workbook.addWorksheet('Nutrient Report');
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet('Nutrient Report');
 
-    let headers = [
+    const headers = [
         { header: 'Food' },
         { header: 'Food Code' },
         { header: 'Quantity (g)', style: { numFmt: '0.00' } }
     ];
 
-    for (let nutrient of nutrients) {
+    for (const nutrient of nutrients) {
         headers.push({
             header: nutrient.name + ' (' + nutrient.unit + ') ',
             style: { numFmt: '0.00' }
@@ -52,29 +54,29 @@ const writeNutrientReport = async (meals, nutrients) => {
 
     worksheet.columns = headers;
 
-    let grandTotals = {};
+    const grandTotals = {};
     grandTotals['quantity'] = 0;
     nutrients.forEach((nutrient) => (grandTotals[nutrient.id] = 0));
 
-    for (let meal of meals) {
-        let mealTotals = {};
+    for (const meal of meals) {
+        const mealTotals = {};
         mealTotals['quantity'] = 0;
         nutrients.forEach((nutrient) => (mealTotals[nutrient.id] = 0));
 
         worksheet.addRow([meal.name]);
 
-        for (let food of meal.foods) {
+        for (const food of meal.foods) {
             // calculate quantity in grams
-            let gramsQuantity = food.quantity * food.conversion * 100;
+            const gramsQuantity = food.quantity * food.conversion * 100;
 
             mealTotals['quantity'] += gramsQuantity;
             grandTotals['quantity'] += gramsQuantity;
 
-            let newRow = [food.description, food.foodCode, gramsQuantity];
+            const newRow = [food.description, food.foodCode, gramsQuantity];
 
-            for (let nutrient of nutrients) {
+            for (const nutrient of nutrients) {
                 // calculate the amount of nutrient in food
-                let nutrientAmountPerFood = await getNutrientAmountPerFood(
+                const nutrientAmountPerFood = await getNutrientAmountPerFood(
                     nutrient,
                     food
                 );
@@ -119,7 +121,7 @@ const writeNutrientReport = async (meals, nutrients) => {
     workbook.xlsx
         .writeBuffer()
         .then((data) => {
-            let blob = new Blob([data]);
+            const blob = new Blob([data]);
             FileSaver.saveAs(blob, 'Nutrient Report.xlsx');
         })
         .catch((error) => console.log(error));

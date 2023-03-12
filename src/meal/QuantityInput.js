@@ -10,7 +10,7 @@ function QuantityInput({ meal, food, dispatch }) {
     const [validity, setValidity] = useState(QuantityValidity.VALID);
 
     const handleQuantityChange = (event) => {
-        let _quantity = event.target.value;
+        const _quantity = event.target.value;
 
         if (!_quantity) {
             setValidity(QuantityValidity.EMPTY);

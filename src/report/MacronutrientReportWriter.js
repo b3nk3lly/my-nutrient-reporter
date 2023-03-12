@@ -4,7 +4,7 @@ const writeMacronutrientReport = (
     totalFat,
     totalCarbs
 ) => {
-    let worksheet = workbook.addWorksheet('Macronutrient Report');
+    const worksheet = workbook.addWorksheet('Macronutrient Report');
 
     worksheet.columns = [
         { header: 'Macronutrient Distribution', style: { numFmt: '0.00' } },
@@ -14,14 +14,14 @@ const writeMacronutrientReport = (
         { header: 'Total', style: { numFmt: '0.00' } }
     ];
 
-    let KCALS_PER_GRAM_PROTEIN = 4;
-    let KCALS_PER_GRAM_FAT = 9;
-    let KCALS_PER_GRAM_CARBS = 4;
+    const KCALS_PER_GRAM_PROTEIN = 4;
+    const KCALS_PER_GRAM_FAT = 9;
+    const KCALS_PER_GRAM_CARBS = 4;
 
-    let kcalProtein = totalProtein * KCALS_PER_GRAM_PROTEIN;
-    let kcalFat = totalFat * KCALS_PER_GRAM_FAT;
-    let kcalCarbs = totalCarbs * KCALS_PER_GRAM_CARBS;
-    let kcalTotal = kcalProtein + kcalFat + kcalCarbs;
+    const kcalProtein = totalProtein * KCALS_PER_GRAM_PROTEIN;
+    const kcalFat = totalFat * KCALS_PER_GRAM_FAT;
+    const kcalCarbs = totalCarbs * KCALS_PER_GRAM_CARBS;
+    const kcalTotal = kcalProtein + kcalFat + kcalCarbs;
 
     worksheet.addRow([
         'Calculated Energy for Macronutrient Distribution (kCal)',

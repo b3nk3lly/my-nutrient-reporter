@@ -18,8 +18,8 @@ function ServingUnit({ meal, food, dispatch }) {
 
     // Fetch serving sizes for the given food ID
     useEffect(() => {
-        let quantityRegex = /^[0-9]+(\/[0-9]+)?/;
-        let processUnits = (units) => {
+        const quantityRegex = /^[0-9]+(\/[0-9]+)?/;
+        const processUnits = (units) => {
             units = units
                 // filter out meaningless serving sizes
                 .filter(
@@ -34,7 +34,7 @@ function ServingUnit({ meal, food, dispatch }) {
 
                     // if it's a fraction, compute the fraction
                     if (quantity.includes('/')) {
-                        let fraction = quantity.split('/');
+                        const fraction = quantity.split('/');
                         quantity = fraction[0] / fraction[1];
                     }
 
