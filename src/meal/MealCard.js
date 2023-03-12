@@ -38,13 +38,12 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
 	 */
 	const removeMeal = () => {
 		if (
-			!isOnlyMeal &&
-			(meal.foods.length === 0 ||
-				window.confirm(
-					`Are you sure you want to delete ${
-						name === "" ? "Untitled Meal" : name
-					}?`
-				))
+			meal.foods.length === 0 ||
+			window.confirm(
+				`Are you sure you want to delete ${
+					name === "" ? "Untitled Meal" : name
+				}?`
+			)
 		) {
 			dispatch({ type: ReducerActions.REMOVE_MEAL, payload: meal });
 		}
@@ -80,11 +79,13 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
 				}
 				action={
 					<div>
-						<Tooltip title="Delete Meal">
-							<IconButton onClick={removeMeal}>
-								<DeleteOutlineIcon />
-							</IconButton>
-						</Tooltip>
+						<span disabled={isOnlyMeal}>
+							<Tooltip title="Delete Meal">
+								<IconButton onClick={removeMeal}>
+									<DeleteOutlineIcon />
+								</IconButton>
+							</Tooltip>
+						</span>
 						<Tooltip title={collapsed ? "Expand" : "Collapse"}>
 							<IconButton onClick={toggleCollapsed}>
 								{/* Arrow direction depends on whether card is collapsed */}
