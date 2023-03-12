@@ -11,7 +11,7 @@ const mealReducer = (meals, action) => {
         case ReducerActions.UPDATE_NAME:
             return meals.map((meal) => {
                 if (meal.id === action.payload.meal.id) {
-                    let newMeal = { ...meal };
+                    const newMeal = { ...meal };
                     newMeal.name = action.payload.name;
                     return newMeal;
                 }
@@ -21,7 +21,7 @@ const mealReducer = (meals, action) => {
         case ReducerActions.ADD_FOOD:
             return meals.map((meal) => {
                 if (meal.id === action.payload.meal.id) {
-                    let newMeal = { ...meal };
+                    const newMeal = { ...meal };
                     newMeal.foods = [...meal.foods, action.payload.food];
                     return newMeal;
                 }
@@ -31,7 +31,7 @@ const mealReducer = (meals, action) => {
         case ReducerActions.REMOVE_FOOD:
             return meals.map((meal) => {
                 if (meal.id === action.payload.meal.id) {
-                    let newMeal = { ...meal };
+                    const newMeal = { ...meal };
                     newMeal.foods = meal.foods.filter(
                         (food) => food.foodCode !== action.payload.foodCode
                     );
@@ -41,11 +41,11 @@ const mealReducer = (meals, action) => {
             });
 
         case ReducerActions.UPDATE_QUANTITY: {
-            let mealIndex = meals.findIndex(
+            const mealIndex = meals.findIndex(
                 (meal) => meal.id === action.payload.meal.id
             );
 
-            let foodIndex = meals[mealIndex].foods.findIndex(
+            const foodIndex = meals[mealIndex].foods.findIndex(
                 (food) => food.foodCode === action.payload.food.foodCode
             );
 
@@ -55,11 +55,11 @@ const mealReducer = (meals, action) => {
         }
 
         case ReducerActions.UPDATE_CONVERSION: {
-            let mealIndex = meals.findIndex(
+            const mealIndex = meals.findIndex(
                 (meal) => meal.id === action.payload.meal.id
             );
 
-            let foodIndex = meals[mealIndex].foods.findIndex(
+            const foodIndex = meals[mealIndex].foods.findIndex(
                 (food) => food.foodCode === action.payload.food.foodCode
             );
 
