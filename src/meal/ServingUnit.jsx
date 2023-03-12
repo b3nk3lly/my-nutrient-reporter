@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Select, MenuItem } from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
 
