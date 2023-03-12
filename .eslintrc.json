@@ -1,0 +1,14 @@
+{
+    "extends": ["airbnb", "prettier"],
+    "ignorePatterns": ["node_modules", "/public/**"],
+    "rules": {
+        "react/prop-types": "off",
+        "react/jsx-props-no-spreading": "off",
+        "no-alert": "off",
+        "no-console": "off"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}
