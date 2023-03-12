@@ -84,9 +84,9 @@ function ServingUnit({ meal, food, dispatch }) {
             </MenuItem>
             {
                 // Display units fetched from CNF API
-                units.map((unit, index) => (
+                units.map((unit) => (
                     <MenuItem
-                        key={`${food.foodCode}-${index}`}
+                        key={unit.measure_name}
                         value={unit.conversion_factor_value}
                     >
                         {unit.measure_name}
