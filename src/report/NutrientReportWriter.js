@@ -55,7 +55,9 @@ const writeNutrientReport = async (meals, nutrients) => {
         grandTotals[nutrient.id] = 0;
     });
 
-    meals.forEach(async (meal) => {
+    await meals.reduce(async (mealResult, meal) => {
+        await mealResult;
+
         const mealTotals = {};
         mealTotals.quantity = 0;
         nutrients.forEach((nutrient) => {
@@ -64,7 +66,9 @@ const writeNutrientReport = async (meals, nutrients) => {
 
         worksheet.addRow([meal.name]);
 
-        meal.foods.forEach(async (food) => {
+        await meal.foods.reduce(async (foodResult, food) => {
+            await foodResult;
+
             // calculate quantity in grams
             const gramsQuantity = food.quantity * food.conversion * 100;
 
@@ -73,7 +77,9 @@ const writeNutrientReport = async (meals, nutrients) => {
 
             const newRow = [food.description, food.foodCode, gramsQuantity];
 
-            nutrients.forEach(async (nutrient) => {
+            await nutrients.reduce(async (nutrientResult, nutrient) => {
+                await nutrientResult;
+
                 // calculate the amount of nutrient in food
                 const nutrientAmountPerFood = await getNutrientAmountPerFood(
                     nutrient,
@@ -84,10 +90,10 @@ const writeNutrientReport = async (meals, nutrients) => {
                 grandTotals[nutrient.id] += nutrientAmountPerFood;
 
                 newRow.push(nutrientAmountPerFood);
-            });
+            }, Promise.resolve());
 
             worksheet.addRow(newRow);
-        });
+        }, Promise.resolve());
 
         // add totals of each nutrient for this meal
         worksheet.addRow(
@@ -97,7 +103,7 @@ const writeNutrientReport = async (meals, nutrients) => {
         );
 
         worksheet.addRow();
-    });
+    }, Promise.resolve());
 
     // add totals of each nutrient for this meal
     worksheet.addRow(
