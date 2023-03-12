@@ -92,7 +92,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 
     return (
         <Container>
-            <Grid item xs={12} display="flex" alignItems={'center'}>
+            <Grid item xs={12} display="flex" alignItems="center">
                 <h2>Nutrients</h2>
                 <MacronutrientTooltip />
             </Grid>

@@ -103,7 +103,7 @@ function MealCard({ meal, dispatch, isOnlyMeal }) {
                 <CardContent>
                     <Grid container rowSpacing={2}>
                         <Grid item xs={12}>
-                            {<FoodInput meal={meal} dispatch={dispatch} />}
+                            <FoodInput meal={meal} dispatch={dispatch} />
                         </Grid>
                         <Grid item xs={12}>
                             <FoodList meal={meal} dispatch={dispatch} />
