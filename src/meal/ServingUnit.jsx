@@ -64,9 +64,9 @@ function ServingUnit({ meal, food, dispatch }) {
             );
 
             // sort units alphabetically
-            processedUnits = processedUnits.sort((a, b) => {
-                return a['measure_name'] > b['measure_name'] ? 1 : -1;
-            });
+            processedUnits = processedUnits.sort((a, b) =>
+                a['measure_name'] > b['measure_name'] ? 1 : -1
+            );
 
             setUnits(processedUnits);
         };
@@ -91,16 +91,14 @@ function ServingUnit({ meal, food, dispatch }) {
             </MenuItem>
             {
                 // Display units fetched from CNF API
-                units.map((unit, index) => {
-                    return (
-                        <MenuItem
-                            key={`${food.foodCode}-${index}`}
-                            value={unit['conversion_factor_value']}
-                        >
-                            {unit['measure_name']}
-                        </MenuItem>
-                    );
-                })
+                units.map((unit, index) => (
+                    <MenuItem
+                        key={`${food.foodCode}-${index}`}
+                        value={unit['conversion_factor_value']}
+                    >
+                        {unit['measure_name']}
+                    </MenuItem>
+                ))
             }
         </Select>
     );

@@ -26,20 +26,16 @@ function FoodInput({ meal, dispatch }) {
                     .then((json) =>
                         setOptions(
                             json
-                                .map((foodOption) => {
-                                    return {
-                                        foodCode: foodOption['food_code'],
-                                        description:
-                                            foodOption['food_description'],
-                                        quantity: undefined,
-                                        conversion: 0.01 // default to gram conversion rate
-                                    };
-                                })
-                                .sort((a, b) => {
-                                    return a.description > b.description
-                                        ? 1
-                                        : -1; // sort alphabetically
-                                })
+                                .map((foodOption) => ({
+                                    foodCode: foodOption['food_code'],
+                                    description: foodOption['food_description'],
+                                    quantity: undefined,
+                                    conversion: 0.01 // default to gram conversion rate
+                                }))
+                                .sort(
+                                    (a, b) =>
+                                        a.description > b.description ? 1 : -1 // sort alphabetically
+                                )
                         )
                     );
             }
@@ -57,11 +53,10 @@ function FoodInput({ meal, dispatch }) {
     }, [open]);
 
     // returns true if and only if the meal already contains a given food
-    const isOptionSelected = (option) => {
-        return meal.foods.some(
+    const isOptionSelected = (option) =>
+        meal.foods.some(
             (foodInMeal) => foodInMeal.foodCode === option.foodCode
         );
-    };
 
     // match options by name or food code
     const filterOptions = createFilterOptions({

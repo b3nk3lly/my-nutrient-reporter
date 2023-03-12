@@ -26,17 +26,15 @@ function MealController({ meals, dispatch, foodOptions }) {
                 alignItems="center"
                 justifyContent="center"
             >
-                {meals.map((meal) => {
-                    return (
-                        <Grid item xs={12} key={meal.id}>
-                            <MealCard
-                                meal={meal}
-                                dispatch={dispatch}
-                                isOnlyMeal={meals.length === 1}
-                            />
-                        </Grid>
-                    );
-                })}
+                {meals.map((meal) => (
+                    <Grid item xs={12} key={meal.id}>
+                        <MealCard
+                            meal={meal}
+                            dispatch={dispatch}
+                            isOnlyMeal={meals.length === 1}
+                        />
+                    </Grid>
+                ))}
                 <Grid item>
                     <Tooltip title="Add Meal">
                         <IconButton

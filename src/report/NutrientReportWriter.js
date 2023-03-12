@@ -10,13 +10,10 @@ const nutrientAmountUri =
  * Returns true if and only if the list of nutrients contains Protein,
  * Total Fat, and Carbohydrates.
  */
-const containsAllMacronutrients = (nutrients) => {
-    return (
-        nutrients.some((nutrient) => nutrient.id === Macronutrients.PROTEIN) &&
-        nutrients.some((nutrient) => nutrient.id === Macronutrients.FAT) &&
-        nutrients.some((nutrient) => nutrient.id === Macronutrients.CARBS)
-    );
-};
+const containsAllMacronutrients = (nutrients) =>
+    nutrients.some((nutrient) => nutrient.id === Macronutrients.PROTEIN) &&
+    nutrients.some((nutrient) => nutrient.id === Macronutrients.FAT) &&
+    nutrients.some((nutrient) => nutrient.id === Macronutrients.CARBS);
 
 const getNutrientAmountPerFood = async (nutrient, food) => {
     const response = await fetch(nutrientAmountUri + food.foodCode);

@@ -24,14 +24,12 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
     /**
      * Maps JSON to a nutrient.
      */
-    const newNutrient = (nutrient) => {
-        return {
-            key: nutrient['nutrient_name_id'],
-            id: nutrient['nutrient_name_id'],
-            name: nutrient['nutrient_web_name'],
-            unit: nutrient['unit']
-        };
-    };
+    const newNutrient = (nutrient) => ({
+        key: nutrient['nutrient_name_id'],
+        id: nutrient['nutrient_name_id'],
+        name: nutrient['nutrient_web_name'],
+        unit: nutrient['unit']
+    });
 
     // Fetch nutrient list when page loads
     useEffect(() => {
@@ -54,9 +52,9 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
             setSelectedNutrients(macronutrients);
 
             setNutrients(
-                json.map(newNutrient).sort((a, b) => {
-                    return a.name > b.name ? 1 : -1; // sort alphabetically
-                })
+                json.map(newNutrient).sort(
+                    (a, b) => (a.name > b.name ? 1 : -1) // sort alphabetically
+                )
             );
         }
 
@@ -66,9 +64,8 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
     /**
      * 	Returns true if and only if the nutrient is already selected
      */
-    const isOptionSelected = (option) => {
-        return selectedNutrients.some((nutrient) => nutrient.id === option.id);
-    };
+    const isOptionSelected = (option) =>
+        selectedNutrients.some((nutrient) => nutrient.id === option.id);
 
     const handleChange = (event, values) => {
         setSelectedNutrients(values);
@@ -137,16 +134,14 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
                     <CardContent>
                         {/* selected options */}
                         <Grid container columnSpacing={1} rowSpacing={1}>
-                            {selectedNutrients.map((nutrient) => {
-                                return (
-                                    <Grid item key={nutrient.id}>
-                                        <Chip
-                                            label={nutrient.name}
-                                            onDelete={handleDelete(nutrient)}
-                                        />
-                                    </Grid>
-                                );
-                            })}
+                            {selectedNutrients.map((nutrient) => (
+                                <Grid item key={nutrient.id}>
+                                    <Chip
+                                        label={nutrient.name}
+                                        onDelete={handleDelete(nutrient)}
+                                    />
+                                </Grid>
+                            ))}
                         </Grid>
                     </CardContent>
                 ) : null}
