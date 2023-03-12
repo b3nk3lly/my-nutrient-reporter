@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { FormControl, TextField } from '@mui/material';
+import { FormControl, InputAdornment, TextField } from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
 import QuantityValidity from '../enums/QuantityValidity';
 import QuantityErrorMessage from '../error-messages/QuantityErrorMessage';
@@ -41,13 +41,15 @@ function QuantityInput({ meal, food, dispatch }) {
             autoComplete="off"
             InputProps={{
                 endAdornment: (
-                    <FormControl>
-                        <ServingUnit
-                            meal={meal}
-                            food={food}
-                            dispatch={dispatch}
-                        />
-                    </FormControl>
+                    <InputAdornment position="end">
+                        <FormControl>
+                            <ServingUnit
+                                meal={meal}
+                                food={food}
+                                dispatch={dispatch}
+                            />
+                        </FormControl>
+                    </InputAdornment>
                 )
             }}
             onChange={handleQuantityChange}
