@@ -19,8 +19,8 @@ function ServingUnit({ meal, food, dispatch }) {
     // Fetch serving sizes for the given food ID
     useEffect(() => {
         const quantityRegex = /^[0-9]+(\/[0-9]+)?/;
-        const processUnits = (units) => {
-            units = units
+        const processUnits = (processedUnits) => {
+            processedUnits = processedUnits
                 // filter out meaningless serving sizes
                 .filter(
                     (unit) => unit['measure_name'] !== 'no serving specified'
@@ -59,14 +59,16 @@ function ServingUnit({ meal, food, dispatch }) {
 
             // if there is a unit for grams, remove it.
             // we hard-code this as the default
-            units = units.filter((unit) => unit['measure_name'] !== 'g');
+            processedUnits = processedUnits.filter(
+                (unit) => unit['measure_name'] !== 'g'
+            );
 
             // sort units alphabetically
-            units = units.sort((a, b) => {
+            processedUnits = processedUnits.sort((a, b) => {
                 return a['measure_name'] > b['measure_name'] ? 1 : -1;
             });
 
-            setUnits(units);
+            setUnits(processedUnits);
         };
 
         fetch(servingSizesUri + food.foodCode) // fetch serving sizes for the food ID
