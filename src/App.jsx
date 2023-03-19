@@ -7,7 +7,6 @@ import MealController from './meal/MealController';
 import NutrientSelect from './nutrient/NutrientSelect';
 import Theme from './styles/Theme';
 import Header from './Header';
-import Footer from './Footer';
 import mealReducer from './MealReducer';
 import GenerateReportButton from './report/GenerateReportButton';
 
@@ -48,9 +47,6 @@ function App() {
                         meals={meals}
                         nutrients={selectedNutrients}
                     />
-                </Grid>
-                <Grid item xs={12} sm={10}>
-                    <Footer />
                 </Grid>
             </Grid>
         </ThemeProvider>
