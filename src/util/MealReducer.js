@@ -1,4 +1,4 @@
-import ReducerActions from './enums/ReducerActions';
+import ReducerActions from '../enums/ReducerActions';
 
 const mealReducer = (meals, action) => {
     switch (action.type) {

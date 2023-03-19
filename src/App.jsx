@@ -7,7 +7,7 @@ import MealController from './meal/MealController';
 import NutrientSelect from './nutrient/NutrientSelect';
 import Theme from './styles/Theme';
 import Header from './Header';
-import mealReducer from './MealReducer';
+import mealReducer from './util/MealReducer';
 import GenerateReportButton from './report/GenerateReportButton';
 
 function App() {
