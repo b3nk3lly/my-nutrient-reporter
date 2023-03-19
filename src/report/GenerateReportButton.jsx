@@ -9,7 +9,7 @@ import writeNutrientReport from './NutrientReportWriter';
  * If any of these criteria are not met, an alert is displayed.
  */
 const validate = (meals, nutrients) => {
-    meals.forEach((meal) => {
+    const mealsAreValid = meals.every((meal) => {
         const mealName = meal.name === '' ? 'Untitled Meal' : meal.name;
 
         if (meal.foods.length === 0) {
@@ -20,7 +20,7 @@ const validate = (meals, nutrients) => {
             return false;
         }
 
-        meal.foods.forEach((food) => {
+        return meal.foods.every((food) => {
             if (!food.quantity || food.quantity === 0) {
                 window.alert(
                     `Please enter a quantity for ${food.description} in ${mealName}`
@@ -30,9 +30,11 @@ const validate = (meals, nutrients) => {
 
             return true;
         });
-
-        return true;
     });
+
+    if (!mealsAreValid) {
+        return false;
+    }
 
     if (nutrients.length === 0) {
         window.alert('Please select at least one nutrient.');
