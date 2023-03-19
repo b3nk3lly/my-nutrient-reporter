@@ -50,7 +50,12 @@ const handleClick = (meals, nutrients) => {
 
 function GenerateReportButton({ meals, nutrients }) {
     return (
-        <Box display="flex" justifyContent="center" alignItems="center">
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ padding: '1rem' }}
+        >
             <Button
                 onClick={() => handleClick(meals, nutrients)}
                 className="Button"
