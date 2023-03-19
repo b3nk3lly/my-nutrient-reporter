@@ -3,6 +3,8 @@
     "version": "0.1.0",
     "private": false,
     "homepage": "https://b3nk3lly.github.io/my-nutrient-reporter",
+    "repository": "https://github.com/b3nk3lly/my-nutrient-reporter",
+    "license": "MIT",
     "dependencies": {
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
