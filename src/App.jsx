@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import MealController from './meal/MealController';
 import NutrientSelect from './nutrient/NutrientSelect';
 import Theme from './styles/Theme';
-import Header from './Header';
+import Header from './layout/Header';
 import mealReducer from './util/MealReducer';
 import GenerateReportButton from './report/GenerateReportButton';
 
