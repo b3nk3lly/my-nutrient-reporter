@@ -87,6 +87,7 @@ function FoodInput({ meal, dispatch }) {
             getOptionLabel={(foodOption) => foodOption.description}
             filterOptions={filterOptions}
             onChange={handleChange}
+            blurOnSelect
             value={food}
             open={open}
             onOpen={() => {

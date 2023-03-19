@@ -109,6 +109,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
                         <Autocomplete
                             multiple
                             fullWidth
+                            blurOnSelect
                             onChange={handleChange}
                             value={selectedNutrients}
                             options={nutrients.filter(
