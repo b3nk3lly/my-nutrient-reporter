@@ -14,7 +14,7 @@ function QuantityInput({ meal, food, dispatch }) {
 
         if (!newQuantity) {
             setValidity(QuantityValidity.EMPTY);
-        } else if (Number.isNaN(newQuantity)) {
+        } else if (Number.isNaN(Number(newQuantity))) {
             setValidity(QuantityValidity.NAN);
         } else if (newQuantity <= 0) {
             setValidity(QuantityValidity.NON_POSITIVE);
