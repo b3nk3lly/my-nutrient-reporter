@@ -4,7 +4,7 @@ const writeMacronutrientReport = (
     totalFat,
     totalCarbs
 ) => {
-    const worksheet = workbook.addWorksheet('Macronutrient Report');
+    const worksheet = workbook.addWorksheet('Macronutrient Breakdown');
 
     worksheet.columns = [
         { header: 'Macronutrient Distribution', style: { numFmt: '0.00' } },
