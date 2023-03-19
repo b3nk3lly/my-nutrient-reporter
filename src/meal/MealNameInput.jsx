@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { TextField } from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
+import Colors from '../enums/Colors';
 
 function MealNameInput({ meal, dispatch }) {
     const [name, setName] = useState(meal.name);
@@ -28,7 +29,7 @@ function MealNameInput({ meal, dispatch }) {
             onBlur={updateName}
             InputProps={{
                 style: {
-                    color: '#183a1d'
+                    color: Colors.DARK_GREEN
                 }
             }}
         />

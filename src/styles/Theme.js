@@ -1,14 +1,13 @@
 import { alpha, createTheme } from '@mui/material/styles';
+import Colors from '../enums/Colors';
 
 function Theme() {
-    const darkGreen = '#183a1d';
-
     return createTheme({
         components: {
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        color: darkGreen,
+                        color: Colors.DARK_GREEN,
                         borderColor: 'black',
                         borderRadius: 5
                     }
@@ -17,35 +16,35 @@ function Theme() {
             MuiInput: {
                 styleOverrides: {
                     root: {
-                        color: darkGreen,
-                        border: darkGreen
+                        color: Colors.DARK_GREEN,
+                        border: Colors.DARK_GREEN
                     }
                 }
             },
             MuiCardHeader: {
                 styleOverrides: {
                     root: {
-                        background: alpha(darkGreen, 0.08)
+                        background: alpha(Colors.DARK_GREEN, 0.08)
                     }
                 }
             }
         },
         palette: {
             background: {
-                paper: '#eef7d4'
+                paper: Colors.PALE_GREEN
             }
         },
         typography: {
             h1: {
                 fontFamily: 'sans-serif',
                 textAlign: 'center',
-                color: '#fb6f92',
+                color: Colors.MAGENTA,
                 fontSize: '3rem'
             },
             subtitle2: {
                 fontFamily: 'sans-serif',
                 textAlign: 'center',
-                color: '#fb6f92'
+                color: Colors.MAGENTA
             },
             body1: {
                 color: 'black'
