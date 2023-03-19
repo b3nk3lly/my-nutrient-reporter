@@ -6,7 +6,7 @@
     "repository": "https://github.com/b3nk3lly/my-nutrient-reporter",
     "license": "MIT",
     "dependencies": {
-        "@emotion/react": "^11.9.3",
+        "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.9.3",
         "@fontsource/roboto": "^4.5.7",
         "@mui/icons-material": "^5.8.4",
