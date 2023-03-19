@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Box, Typography } from '@mui/material';
-import '../App.css';
+import '../styles/App.css';
 import writeNutrientReport from './NutrientReportWriter';
 
 /**

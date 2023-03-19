@@ -1,11 +1,11 @@
 import { React, useState, useReducer } from 'react';
 import { Divider, Grid } from '@mui/material';
-import './App.css';
+import './styles/App.css';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import MealController from './meal/MealController';
 import NutrientSelect from './nutrient/NutrientSelect';
-import Theme from './Theme';
+import Theme from './styles/Theme';
 import Header from './Header';
 import Footer from './Footer';
 import mealReducer from './MealReducer';
