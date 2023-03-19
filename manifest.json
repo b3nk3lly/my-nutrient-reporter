@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Nutrient Reporter",
+  "name": "My Nutrient Reporter",
   "icons": [
     {
       "src": "favicon.ico",
