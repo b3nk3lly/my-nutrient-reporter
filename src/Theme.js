@@ -40,7 +40,12 @@ function Theme() {
                 fontFamily: 'sans-serif',
                 textAlign: 'center',
                 color: '#fb6f92',
-                fontSize: '4rem'
+                fontSize: '3rem'
+            },
+            subtitle2: {
+                fontFamily: 'sans-serif',
+                textAlign: 'center',
+                color: '#fb6f92'
             },
             body1: {
                 color: 'black'
