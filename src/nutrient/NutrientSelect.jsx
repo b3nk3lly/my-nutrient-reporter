@@ -9,11 +9,13 @@ import {
     Card,
     CardContent,
     IconButton,
-    Tooltip
+    Tooltip,
+    Typography
 } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import Macronutrients from '../enums/Macronutrients';
 import MacronutrientTooltip from './MacronutrientTooltip';
+import SectionHeader from '../layout/SectionHeader';
 
 function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
     const nutrientNamesUri =
@@ -92,10 +94,15 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
 
     return (
         <Container>
-            <Grid item xs={12} display="flex" alignItems="center">
-                <h2>Nutrients</h2>
-                <MacronutrientTooltip />
-            </Grid>
+            <SectionHeader
+                renderHeader={() => (
+                    <Grid item display="flex" alignItems="center">
+                        <Typography variant="h2">Nutrients</Typography>
+                        <MacronutrientTooltip />
+                    </Grid>
+                )}
+                helperText="Select the nutrients you want to track"
+            />
             <Card variant="outlined" sx={{ border: 2, borderRadius: 5 }}>
                 <CardHeader
                     title={

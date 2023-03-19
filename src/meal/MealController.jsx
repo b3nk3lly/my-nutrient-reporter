@@ -1,8 +1,15 @@
 import { React, useState } from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { Container, Grid, IconButton, Tooltip } from '@mui/material';
+import {
+    Container,
+    Grid,
+    IconButton,
+    Tooltip,
+    Typography
+} from '@mui/material';
 import ReducerActions from '../enums/ReducerActions';
 import MealCard from './MealCard';
+import SectionHeader from '../layout/SectionHeader';
 
 function MealController({ meals, dispatch }) {
     const [nextMealKey, setNextMealKey] = useState(1);
@@ -17,9 +24,10 @@ function MealController({ meals, dispatch }) {
 
     return (
         <Container>
-            <Grid container rowSpacing={1}>
-                <h2>Meals</h2>
-            </Grid>
+            <SectionHeader
+                renderHeader={() => <Typography variant="h2">Meals</Typography>}
+                helperText="Enter the food that you ate"
+            />
             <Grid
                 container
                 rowSpacing={3}
