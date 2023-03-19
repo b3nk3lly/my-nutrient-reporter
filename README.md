@@ -1,70 +1,50 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 
-## Available Scripts
+# My Nutrient Reporter
 
-In the project directory, you can run:
+This app is meant to provide a simple, convenient way of tracking nutritional intake. Tell it what food you ate, how much you ate, and what nutrients you're interested in tracking, and it will generate an Excel workbook containing a breakdown of the nutrients in your food.
 
-### `npm start`
+The data used by this app comes from the [Canadian Nutrient File API](https://produits-sante.canada.ca/api/documentation/cnf-documentation-en.html) from Health Canada. The API provides nutritional data on a wide variety of foods. Based on what food you enter, this app uses the API to calculate how much of a given set of nutrients is in your food.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To install this project, first clone it:
 
-### `npm test`
+```bash
+  git clone https://github.com/b3nk3lly/my-nutrient-reporter.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Next, navigate to the project directory:
 
-### `npm run build`
+```bash
+  cd my-nutrient-reporter
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Finally, install dependencies and run the app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm install --save
+  npm start
+```
+    
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There are two sections of the app: Meals and Nutrients. The Meals section is for entering the food that you ate and the Nutrients section is for entering the nutrients you want to track.
 
-### `npm run eject`
+You are able to divide the food you ate into meals. Each meal can be named.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To enter a food, select one from the dropdown menu inside a meal. Food can be searched by name or by CNF food code. After selecting a food, select a unit of measurement and the quantity that you ate. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The units of measurement available to select depend on the food. For example, if you select the food "Egg, chicken, whole, cooked, scrambled or omelet", you will be able to choose "large egg", "small egg", "grams", or "millilitres" as a unit of measurement. The unit "grams" is available for all foods.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Here is an example of what a filled-out meal might look like:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![image](https://user-images.githubusercontent.com/76674774/226212503-efd010ff-7e32-4304-b41e-d3e0bcabd227.png)
 
-## Learn More
+To choose the nutrients you want to track, select them from the dropdown in the Nutrients section. You can filter down this list by typing in a nutrient's name. By default, the macronutrients "Protein", "Carbohydrates", and "Total Fat" are selected. If you generate a report with these selected, a "Macronutrient Breakdown" sheet will be included in the report. This sheet provides the number of kilocalories of macronutrients you consumed as well as the percentages of which macronutrients make up your total macronutrient intake.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After you have filled in your meals and nutrients, click "Generate Report" to download your report.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+See here for a sample report: [Sample Nutrient Report.xlsx](https://github.com/b3nk3lly/my-nutrient-reporter/files/11012503/Sample.Nutrient.Report.xlsx)
