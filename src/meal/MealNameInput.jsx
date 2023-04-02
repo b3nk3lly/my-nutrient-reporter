@@ -32,6 +32,7 @@ function MealNameInput({ meal, dispatch }) {
                     color: Colors.DARK_GREEN
                 }
             }}
+            fullWidth
         />
     );
 }
