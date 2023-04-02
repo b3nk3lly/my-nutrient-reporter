@@ -22,7 +22,7 @@ const mealReducer = (meals, action) => {
             return meals.map((meal) => {
                 if (meal.id === action.payload.meal.id) {
                     const newMeal = { ...meal };
-                    newMeal.foods = [...meal.foods, action.payload.food];
+                    newMeal.foods = [action.payload.food, ...meal.foods];
                     return newMeal;
                 }
                 return meal;
