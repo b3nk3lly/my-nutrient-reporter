@@ -33,6 +33,23 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
         unit: nutrient.unit
     });
 
+    /**
+     * Compares the names of two nutrients so they can be sorted alphabetically.
+     * Names beginning with numbers appear last.
+     */
+    const compareNutrients = (a, b) => {
+        const startsWithNumber = /^\d/;
+        if (startsWithNumber.test(a.name) && !startsWithNumber.test(b.name)) {
+            return 1;
+        }
+
+        if (!startsWithNumber.test(a.name) && startsWithNumber.test(b.name)) {
+            return -1;
+        }
+
+        return a.name > b.name ? 1 : -1;
+    };
+
     // Fetch nutrient list when page loads
     useEffect(() => {
         async function fetchNutrients() {
@@ -52,12 +69,7 @@ function NutrientSelect({ selectedNutrients, setSelectedNutrients }) {
                 .map(newNutrient);
 
             setSelectedNutrients(macronutrients);
-
-            setNutrients(
-                json.map(newNutrient).sort(
-                    (a, b) => (a.name > b.name ? 1 : -1) // sort alphabetically
-                )
-            );
+            setNutrients(json.map(newNutrient).sort(compareNutrients));
         }
 
         fetchNutrients();
