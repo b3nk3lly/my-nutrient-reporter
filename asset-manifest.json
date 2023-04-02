@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my-nutrient-reporter/static/css/main.2084f59a.css",
-    "main.js": "/my-nutrient-reporter/static/js/main.e40fed00.js",
+    "main.js": "/my-nutrient-reporter/static/js/main.c6357bbd.js",
     "static/media/background.jpg": "/my-nutrient-reporter/static/media/background.8ac3b776d5c891839b5c.jpg",
     "static/media/roboto-all-500-normal.woff": "/my-nutrient-reporter/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/my-nutrient-reporter/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -37,10 +37,10 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/my-nutrient-reporter/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/my-nutrient-reporter/index.html",
     "main.2084f59a.css.map": "/my-nutrient-reporter/static/css/main.2084f59a.css.map",
-    "main.e40fed00.js.map": "/my-nutrient-reporter/static/js/main.e40fed00.js.map"
+    "main.c6357bbd.js.map": "/my-nutrient-reporter/static/js/main.c6357bbd.js.map"
   },
   "entrypoints": [
     "static/css/main.2084f59a.css",
-    "static/js/main.e40fed00.js"
+    "static/js/main.c6357bbd.js"
   ]
 }
